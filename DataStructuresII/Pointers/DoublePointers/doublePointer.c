@@ -63,34 +63,7 @@
         }
         printf("\n");
     }
-    //   *(*(matriz+0)+0) = 1;
-
-
-    //   *(*(matriz+1)+0) = 3;
-    //   *(*(matriz+1)+1) = 4;
-
-    //   *(*(matriz+2)+0) = 7;
-    //   *(*(matriz+2)+1) = 8;
-    //   *(*(matriz+2)+2) = 8;
-
-    //   *(*(matriz+3)+0) = 9;
-    //   *(*(matriz+3)+1) = 10;
-    //   *(*(matriz+3)+2) = 11;
-    //   *(*(matriz+3)+3) = 12;
-
-
-      // for(i =0; i<TAMANHO; i++){
-      //   for(j = 0; j<)
-      // }
-
-
-
-    //   printf("%d %d\n", matriz[0][0], matriz[0][1]);
-    //   // printf("%d %d\n", matriz[1][0], matriz[1][1]);
-
-    //   printf("%d %d\n", matriz[1][0], matriz[1][1]);
-
-    //   printf("%d %d %d\n", matriz[2][0], matriz[2][1],matriz[2][2]);
+   
       free(matriz);
       return EXIT_SUCCESS;
     }
