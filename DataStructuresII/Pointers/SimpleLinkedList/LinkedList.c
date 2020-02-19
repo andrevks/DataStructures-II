@@ -6,8 +6,8 @@
 void init(LinkedList *list){
 
     //Inicializando a lista
-    list->first = NULL;
-    list->size = 0;
+    list = 
+
 }
 
 int enqueue(LinkedList *list, void *data){
