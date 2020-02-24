@@ -13,7 +13,8 @@
     }Node;
 
     typedef struct LinkedList {
-        Node *first;
+        // Node *first;
+        Node *tail;
         int size;
     }LinkedList;
 
@@ -34,4 +35,7 @@
     int addAll(LinkedList *listDest, int pos, LinkedList *listSource);
     void* removePos(LinkedList *list, int pos);
     bool removeData(LinkedList *list, void *data, compare equal);
+
+    //added to try things out
+   
     #endif
