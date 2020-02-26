@@ -22,10 +22,6 @@ void init(LinkedList *list){
     trashNode->data = NULL;
     trashNode->next = trashNode;
 
-    // printf("\n,.,.,,.,,.,.,,.,\n");
-    // printf("TrashNode Address Pointed to an Valid area:%p\n", trashNode);
-    // printf("TrashNode Address of the next: %p\n",trashNode->next);
-    // printf("\n,.,.,,.,,.,.,,.,\n");
 
     //Tail aponta para o trashnode;
     list->tail = trashNode;
@@ -35,8 +31,7 @@ void init(LinkedList *list){
 //Verificar se a lista está vazia
 bool isEmpty(LinkedList *list){
 
-    //se o tail é igual ao "head" 
-    //a lista está vazia
+    //Se o tamanho é igual a zero a lista está vazia
     if(list->size = 0){
         return true;
     }else{
