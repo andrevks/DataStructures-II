@@ -13,7 +13,7 @@
     }Node;
 
     typedef struct LinkedList {
-        // Node *first;
+        //Node *first;
         Node *tail;
         int size;
     }LinkedList;
