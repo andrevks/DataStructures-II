@@ -12,11 +12,11 @@ void init(LinkedList *list){
     Node  * trashNode = (Node *) (malloc(sizeof(Node)));
 
     //Verificando o sucesso da alocação
-    //Tendo em vista que o malloc retorn NULL em caso de erro
+    //Tendo em vista que o malloc retorna NULL em caso de erro
     if(trashNode == NULL){
         printf("Erro ao alocar o trashNode");
     }
-    
+     
     //Apontando o dado para NULL
     //E o next para ele mesmo
     trashNode->data = NULL;
@@ -32,7 +32,7 @@ void init(LinkedList *list){
 bool isEmpty(LinkedList *list){
 
     //Se o tamanho é igual a zero a lista está vazia
-    if(list->size = 0){
+    if(list->size == 0){
         return true;
     }else{
         return false;
@@ -40,9 +40,28 @@ bool isEmpty(LinkedList *list){
 }
 int enqueue(LinkedList *list, void *data){
     
-   if(isEmpty){
+    Node * new_node = (Node *)(malloc(sizeof(Node)));
+    if(new_node == NULL) return 0;
 
-   }
+    if(isEmpty){
+          new_node->next = NULL;
+          new_node->data = data;
+            //Head(tail->next) aponta para o primeiro nó
+          list->tail->next = new_node;
+          //Tail aponta para o último
+          list->tail = new_node;
+          list->size++;
+
+    }else{
+        //novo nó aponta para o início
+        new_node->data = data;
+        new_node->next = list->tail->next;
+        //Head aponta para o novo nó
+        list->tail->next = new_node;
+        list->size++;
+    }
+  
+    return 1;
    
 
     
