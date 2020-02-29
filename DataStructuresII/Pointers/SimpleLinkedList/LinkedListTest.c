@@ -27,6 +27,9 @@ int main(){
 
     (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
+    int * y = dequeue(&list);
+
+    printf("y=%d",*y);
 
     
 

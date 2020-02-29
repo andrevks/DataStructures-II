@@ -43,7 +43,7 @@ int enqueue(LinkedList *list, void *data){
     Node * new_node = (Node *)(malloc(sizeof(Node)));
     if(new_node == NULL) return 0;
 
-    if(isEmpty){
+    if(isEmpty(list)){
           new_node->next = NULL;
           new_node->data = data;
             //Head(tail->next) aponta para o primeiro nó
@@ -51,8 +51,8 @@ int enqueue(LinkedList *list, void *data){
           //Tail aponta para o último
           list->tail = new_node;
           list->size++;
-
     }else{
+
         //novo nó aponta para o início
         new_node->data = data;
         new_node->next = list->tail->next;
@@ -66,8 +66,37 @@ int enqueue(LinkedList *list, void *data){
 
     
 }
+void * dequeue(LinkedList *list){
+    
+    Node * atual = (Node *) malloc(sizeof(Node));
+    Node * aux = (Node *) malloc(sizeof(Node));
 
-// void print(LinkedList * list){
-//     printf("Endereço Tail: %p\n",(list->tail));
-//     printf("Next Address: %p\n",(list->tail->next));
-// }
+    atual->data = NULL;
+    atual->next = NULL;
+
+    if(!isEmpty(list)){
+
+        atual = list->tail->next;
+
+        while ( atual->next != list->tail)
+        {   
+            printf("Before= %p\n",atual->data);
+            atual= atual->next;
+            printf("atual= %p\n",atual->data);
+
+          
+        }
+
+        aux = list->tail->next;
+        list->tail = atual;
+        list->tail->next = aux;
+
+      
+        // free(atual);
+        // free(aux);
+    }
+
+       return atual->data;
+   
+}
+
