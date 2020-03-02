@@ -68,32 +68,42 @@ int enqueue(LinkedList *list, void *data){
 }
 void * dequeue(LinkedList *list){
     
-    Node * atual = (Node *) malloc(sizeof(Node));
-    Node * aux = (Node *) malloc(sizeof(Node));
-
-    atual->data = NULL;
-    atual->next = NULL;
-
+      Node * atual;
+      Node * aux;
+      int * test;
+    
     if(!isEmpty(list)){
-
+        
         atual = list->tail->next;
+        test = (int*) list->tail->data;
 
-        while ( atual->next != list->tail)
-        {   
-            printf("Before= %p\n",atual->data);
-            atual= atual->next;
-            printf("atual= %p\n",atual->data);
+        printf("List->tail->data = %d\n",*test);
+        printf("Atual= %p\n",atual);
+
+        // while ( atual->next != list->tail)
+        // {   
+        //     printf("Before= %p\n",atual->data);
+        //     atual= atual->next;
+        //     printf("atual= %p\n",atual->data);
 
           
-        }
+        // }
 
         aux = list->tail->next;
+
+        printf("AUX= %p\n",aux);
         list->tail = atual;
+
+        printf("List->tail= %p\n",list->tail);
         list->tail->next = aux;
 
-      
-        // free(atual);
-        // free(aux);
+        printf("List->tail->next= %p\n",list->tail->next);
+
+     
+
+        list->size--;
+        // // free(atual);
+        // // free(aux);
     }
 
        return atual->data;
