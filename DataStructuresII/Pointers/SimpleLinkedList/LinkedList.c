@@ -94,10 +94,39 @@ void * dequeue(LinkedList *list){
 
         list->size--;
         return data;
-
     }
-
        return NULL;
    
+}
+
+int push(LinkedList *list, void *data){
+    /*Como a função enqueue é igual a push*/
+    return enqueue(list,data);
+}
+
+void * pop(LinkedList *list){
+
+    Node * aux;
+
+    if(!isEmpty){
+
+        aux = list->tail->next;
+
+        while (aux->next != list->tail)
+           aux = aux->next;
+
+
+          aux->next = list->tail->next; 
+          
+          void * data = list->tail->data;
+
+          free(list->tail);
+
+          list->tail = aux;
+
+          return data;
+    }
+
+    return NULL;
 }
 
