@@ -2,58 +2,52 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
+/* Aqui o usuário pode criar uma função com retorno
+bool e dois parametros Void*/
 
 int main(){
+  
     //criando uma linked list
    LinkedList list;
    int x;
 
     init(&list);
-
+    //Como se usa o tipo Void, deve-se alocar um endereço de memória
+    //sempre quando retornar algum dado, deve-se converter para o tipo do dado guardado
+  
    //usando o malloc para alocar memória  do tipo inteiro
-     int * number = (int *) malloc(sizeof(int));
+     int *number = (int *) malloc(sizeof(int));
         *number = 0;
+        printf("number:%d",*number);
+      
 
-         x = enqueue(&list,&number);
+         x = push(&list,number);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
+     
 
      int * number1 = (int *) malloc(sizeof(int));
          *number1 = 1;
-         x = enqueue(&list,&number1);
-      
+         x = push(&list,number1);
+
          (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
       int * number2 = (int *) malloc(sizeof(int));
           *number2 = 2;
-          x = enqueue(&list,&number2);
+          x = push(&list,number2);
+
+           int * data1 = (int*) (list.tail->data);
+        printf("list->tail->data= %d\n",*data1);
+
+
   
 
     (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
-     int * y = (int *) dequeue(&list);
-     printf("\ny(ADDRESS)=%p\n",y);
-     printf("y=%d\n",*y);
+    // while(!isEmpty(&list))
+    //     printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
 
-     int a = 10; 
-     void *ptr = &a; 
-      rintf("%d\n", *(int *)ptr); 
-    
+    printf("%d",first(&list));
 
-    // for(int i=0;i<9;i++){
-      
-         
-    //       x = enqueue(&list,vetor);
-        
-    //       if(x){
-    //           printf("ok\n");
-    //       }else{
-    //           printf("No way!\n");
-    //       }
-
-    //       i++;
-    // }
-    
-    
 
 
     // printf("Tail Real Address: %p\n",(&list.tail));
@@ -73,3 +67,5 @@ int main(){
 
     return 0;
 }
+
+
