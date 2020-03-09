@@ -14,7 +14,7 @@
     }Node;
 
     /*Tail aponta para o final da lista
-    e para informar o tamanho na variável size 
+    e para informar o tamanho foi criado a variável size 
     */
    
     typedef struct LinkedList {
@@ -24,19 +24,23 @@
     }LinkedList;
 
     /*Por questões de legidibilidade, algumas funções são reutilizadas*/
-
+    //no LinkedListTest.c:
     //Qualquer função que alguem implementar
     //que retorne boleano e os tipos
     //das funções sejam iguais 
+    
 
+    //Aqui:
     //Criando um ponteiro de função 
     //que recebe como parâmetros dois ponteiros void
     //retornando bool
 
-    //Quando utilizar esse tipo compare,
+    //OBS:
+    //Quando utilizar esse tipo "compare",
     //suponhe-se que o usuário criou 
     //essa função com o objetivo de comparar
-    //dois dados, a vantagem
+    //dois dados, a vantagem é que a biblioteca
+    //serve para qualquer tipo de dado
     typedef bool (*compare)(void*,void*);
 
     //Inicializa a lista
@@ -51,11 +55,12 @@
     void* top(LinkedList *list);
     bool isEmpty(LinkedList *list);
 
+    //IndexOf
     //Devolver a posição baseado no dado
     //Aqui trabalha somente com o endereço dos dados
     //quem usar a biblioteca, informa o tipo de dado
     //Para resolver esse problema é criado um ponteiro
-    //de função
+    //de função para devolver a posição baseado no dado
 
     //Registrador Contador de instrução, guarda o endereço da próxima instrução
     //Aquele endereço de memória pode ter o endereço de um dado
@@ -76,7 +81,7 @@
     //adicionar o novo nó
     int add(LinkedList *list, int pos, void *data);
 
-    //adiciona alista de origem na lista destino 
+    //adiciona a lista de origem na lista destino 
     //ou seja o tail da lista origem vai no início da lista destino
     //Depois início do destino aponta para o final da lista origem 
     //importante incrementar o size na lista de destino 
