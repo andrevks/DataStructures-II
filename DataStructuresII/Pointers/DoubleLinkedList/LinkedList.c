@@ -121,10 +121,11 @@ void * pop(LinkedList *list){
 
         aux = list->tail->next;
 
-        while (aux->next != list->tail) 
-            aux = aux->next;
+        while (aux->next != list->tail) aux = aux->next;
+
 
           aux->next = list->tail->next; 
+          
           void * data = list->tail->data;
 
           free(list->tail);
@@ -141,7 +142,7 @@ void * pop(LinkedList *list){
 void* top(LinkedList *list){
     //Retorna NULL caso a lista esteja fazia
     //Senão retorna o endereço do dado
-    return (isEmpty(list))? NULL: list->tail->data;
+    return (isEmpty(list))?NULL:list->tail->data;
 }
 
 //consulta o primeiro item da lista
@@ -149,24 +150,26 @@ void* first(LinkedList *list){
 
     //Retorna NULL caso a lista esteja fazia
     //Senão retorna o endereço do dado
-    return (isEmpty(list))? NULL: list->tail->next->data;
+    return (isEmpty(list))?NULL:list->tail->next->data;
 }
 //Consulta o último item da lista
 void* last(LinkedList *list){
     //Como o objetivo é retornar o último
     //a função Top é reaproveitada
     return top(list);
+
+    
 }
 
  int add(LinkedList *list, int pos, void *data){
 
 
-        if(pos <= 0) return push(list,data);
+        if(pos <= 0)return push(list,data);
 
         Node * aux = getNodeByPos(list,(pos-1));
         if(aux == NULL)return 0;
 
-        Node * new_node = (Node*) malloc(sizeof(Node));
+        Node * new_node =(Node*) malloc(sizeof(Node));
 
         new_node->data = data;
 
@@ -179,23 +182,22 @@ void* last(LinkedList *list){
 
  }
 
-//  Node* getNodeByPos(LinkedList *list, int pos){
+ Node* getNodeByPos(LinkedList *list, int pos){
 
-//         //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
-//         //retorna NULL
-//         if(isEmpty(list) || pos >= list->size) return NULL;
+        //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
+        //retorna NULL
+        if(isEmpty(list) || pos >= list->size) return NULL;
 
 
-//         //Se caso não acontecer, continuamos e o aux aponta para o início
-//         Node * aux = list->tail->next;
+        //Se caso não acontecer, continuamos e o aux aponta para o início
+        Node * aux = list->tail->next;
 
-//         //o contador é criado
-//         //enquanto a condição do meio acontecer o loop continua
-//         //Aux aponta para os nós e incrementa o count
+        //o contador é criado
+        //enquanto a condição do meio acontecer o loop continua
+        //Aux aponta para os nós e incrementa o count
 
-//         for(int count = 0; (aux!=list->tail && pos!= count) ;count++, aux = aux->next);
-
-//         return aux;
+        for(int count = 0;(aux!=list->tail && pos!= count);count++, aux = aux->next);
+        return aux;
         
 
-//  }
+ }
