@@ -11,17 +11,18 @@
     typedef struct Node {
         void *data;
         struct Node *next;
+        struct Node *previous;
     }Node;
 
     /*Tail aponta para o final da lista
     e para informar o tamanho foi criado a variável size 
     */
    
-    typedef struct LinkedList {
+    typedef struct DoublyLinkedList {
         //Node *first;
         Node *tail;
         int size;
-    }LinkedList;
+    }DoublyLinkedList;
 
     /*Por questões de legidibilidade, algumas funções são reutilizadas*/
     //no LinkedListTest.c:
@@ -42,18 +43,19 @@
     //dois dados, a vantagem é que a biblioteca
     //serve para qualquer tipo de dado
     typedef bool (*compare)(void*,void*);
+    typedef void (*printNode)(void*);
 
     //Inicializa a lista
     //Caso fosse 
-    void init(LinkedList *list);
-    int enqueue(LinkedList *list, void *data);
-    void* dequeue(LinkedList *list);
-    void* first(LinkedList *list);
-    void* last(LinkedList *list);
-    int push(LinkedList *list, void *data);
-    void* pop(LinkedList *list);
-    void* top(LinkedList *list);
-    bool isEmpty(LinkedList *list);
+void init(DoublyLinkedList *list);
+int enqueue(DoublyLinkedList *list, void *data);
+void* dequeue(DoublyLinkedList *list);
+void* first(DoublyLinkedList *list);
+void* last(DoublyLinkedList *list);
+int push(DoublyLinkedList *list, void *data);
+void* pop(DoublyLinkedList *list);
+void* top(DoublyLinkedList *list);
+bool isEmpty(DoublyLinkedList *list);
 
     //IndexOf
     //Devolver a posição baseado no dado
@@ -65,31 +67,31 @@
     //Registrador Contador de instrução, guarda o endereço da próxima instrução
     //Aquele endereço de memória pode ter o endereço de um dado
     //ou de uma função
-    int indexOf(LinkedList *list, void *data, compare equal);
+    int indexOf(DoublyLinkedList *list,void *data, compare equal);
 
     //Quer saber endereço do dado guardado
     //da posição escolhida
-    void* getPos(LinkedList *list, int pos);
+    void* getPos(DoublyLinkedList *list,int pos);
     
     //função utilitária internamente na lista
     //retorna o endereço do Node
     //pela posição informada 
-    Node* getNodeByPos(LinkedList *list, int pos);
+    Node* getNodeByPos(DoublyLinkedList *list,int pos);
 
     //inserir na posição dada pelo usuário
     //deve-se percorrer até a pos-1 para conseguir 
     //adicionar o novo nó
-    int add(LinkedList *list, int pos, void *data);
+    int add(DoublyLinkedList *list, int pos, void *data);
 
     //adiciona a lista de origem na lista destino 
     //ou seja o tail da lista origem vai no início da lista destino
     //Depois início do destino aponta para o final da lista origem 
     //importante incrementar o size na lista de destino 
-    int addAll(LinkedList *listDest, int pos, LinkedList *listSource);
+    int addAll(DoublyLinkedList *listDest, int pos, DoublyLinkedList *listSource);
 
     //remove o elemento baseado na posição
-    void* removePos(LinkedList *list, int pos);
-    bool removeData(LinkedList *list, void *data, compare equal);
+    void* removePos(DoublyLinkedList *list, int pos);
+    bool removeData(DoublyLinkedList *list, void *data, compare equal);
 
     
    

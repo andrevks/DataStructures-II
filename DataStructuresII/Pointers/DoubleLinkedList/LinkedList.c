@@ -7,24 +7,24 @@
 void init(LinkedList *list){
    
    
-    // //Reservando espaço com o malloc
-    // //convertendo para ponteiro do tipo Node
-    // Node  * trashNode = (Node *) (malloc(sizeof(Node)));
+    //Reservando espaço com o malloc
+    //convertendo para ponteiro do tipo Node
+    Node  * trashNode = (Node *) (malloc(sizeof(Node)));
 
-    // //Verificando o sucesso da alocação
-    // //Tendo em vista que o malloc retorna NULL em caso de erro
-    // if(trashNode == NULL){
-    //     printf("Erro ao alocar o trashNode");
-    // }
+    //Verificando o sucesso da alocação
+    //Tendo em vista que o malloc retorna NULL em caso de erro
+    if(trashNode == NULL){
+        printf("Erro ao alocar o trashNode");
+    }
      
-    // //Apontando o dado para NULL
-    // //E o next para ele mesmo
-    // trashNode->data = NULL;
-    // trashNode->next = trashNode;
+    //Apontando o dado para NULL
+    //E o next para ele mesmo
+    trashNode->data = NULL;
+    trashNode->next = trashNode;
+    trashNode->
 
-
-    // //Tail aponta para o trashnode;
-    // list->tail = trashNode;
+    //Tail aponta para o trashnode;
+    list->tail = trashNode;
 
     list->size = 0;
 
