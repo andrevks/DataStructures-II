@@ -89,6 +89,7 @@
 
     //remove o elemento baseado na posição
     void* removePos(LinkedList *list, int pos);
+    
     bool removeData(LinkedList *list, void *data, compare equal);
 
     

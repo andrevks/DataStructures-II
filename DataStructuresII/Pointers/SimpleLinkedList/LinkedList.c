@@ -113,6 +113,7 @@ int push(LinkedList *list, void *data){
     return enqueue(list,data);
 }
 
+//função retirar 
 void * pop(LinkedList *list){
 
     Node * aux;
@@ -130,6 +131,8 @@ void * pop(LinkedList *list){
           free(list->tail);
 
           list->tail = aux;
+
+          list->size--;
 
           return data;
     }
@@ -179,23 +182,23 @@ void* last(LinkedList *list){
 
  }
 
-//  Node* getNodeByPos(LinkedList *list, int pos){
+ Node* getNodeByPos(LinkedList *list, int pos){
 
-//         //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
-//         //retorna NULL
-//         if(isEmpty(list) || pos >= list->size) return NULL;
+        //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
+        //retorna NULL
+        if(isEmpty(list) || pos >= list->size) return NULL;
 
 
-//         //Se caso não acontecer, continuamos e o aux aponta para o início
-//         Node * aux = list->tail->next;
+        //Se caso não acontecer, continuamos e o aux aponta para o início
+        Node * aux = list->tail->next;
 
-//         //o contador é criado
-//         //enquanto a condição do meio acontecer o loop continua
-//         //Aux aponta para os nós e incrementa o count
+        //o contador é criado
+        //enquanto a condição do meio acontecer o loop continua
+        //Aux aponta para os nós e incrementa o count
 
-//         for(int count = 0; (aux!=list->tail && pos!= count) ;count++, aux = aux->next);
-
-//         return aux;
+        for(int count = 0; (aux != list->tail && pos!= count); count++, aux = aux->next);
+    
+        return aux;
         
 
-//  }
+ }
