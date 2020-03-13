@@ -58,7 +58,7 @@
     //IndexOf
     //Devolver a posição baseado no dado
     //Aqui trabalha somente com o endereço dos dados
-    //quem usar a biblioteca, informa o tipo de dado
+    //quem usar a biblioteca, informa o tipo de dado.
     //Para resolver esse problema é criado um ponteiro
     //de função para devolver a posição baseado no dado
 
@@ -76,8 +76,8 @@
     //pela posição informada 
     Node* getNodeByPos(LinkedList *list, int pos);
 
-    //inserir na posição dada pelo usuário
-    //deve-se percorrer até a pos-1 para conseguir 
+    //inserir na posição dada pelo usuário.
+    //Deve-se percorrer até a pos-1 para conseguir 
     //adicionar o novo nó
     int add(LinkedList *list, int pos, void *data);
 

@@ -34,21 +34,31 @@ int main(){
       int * number2 = (int *) malloc(sizeof(int));
           *number2 = 99;
          x = push(&list,number2);
-        (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
+        (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
-           int * data1 = (int*) (list.tail->data);
-        printf("list->tail->data= %d\n",*data1);
+        //    int * data1 = (int*) (list.tail->data);
+        // printf("list->tail->data= %d\n",*data1);
+
+
+      int * number3 = (int *) malloc(sizeof(int));
+          *number3 = 66;
+         x = add(&list,1,number3);
+
+          (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
+
 
     
+
  
 
-    // while(!isEmpty(&list))
-    //     printf("valor retirado: %d\n ",*((int*)pop(&list)));
+    while(!isEmpty(&list))
+        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
      
     
 
 
-     printf("First:%d\n",*((int*)first(&list)));
+    //  printf("LAST:%d\n",*((int*)last(&list)));
+
     
    
 

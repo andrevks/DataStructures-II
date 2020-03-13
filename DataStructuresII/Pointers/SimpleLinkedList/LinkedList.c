@@ -163,17 +163,25 @@ void* last(LinkedList *list){
 
  int add(LinkedList *list, int pos, void *data){
 
-
+        //Se for o primeiro, é enviado imediatamente
         if(pos <= 0) return push(list,data);
 
-        Node * aux = getNodeByPos(list,(pos-1));
-        if(aux == NULL)return 0;
+        //senão, é criado um aux que receberá um nó anterior 
+        //à posição desejada
 
+        Node * aux =getNodeByPos(list,(pos-1));
+        //se houver algum erro retorna 0
+        if(aux == NULL)return 0; 
+        
+        //cria-se um novo nó e aloca um espaço livre 
         Node * new_node = (Node*) malloc(sizeof(Node));
 
+        //o novo nó recebe o endereço do dado
         new_node->data = data;
-
+        
+        //o next aponta para o next do aux
         new_node->next = aux->next;
+        //Aux next aponta para o novo nó
         aux->next = new_node;
 
         list->size++;
