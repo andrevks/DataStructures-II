@@ -37,7 +37,7 @@
 
     //OBS:
     //Quando utilizar esse tipo "compare",
-    //suponhe-se que o usuário criou 
+    //suponha-se que o usuário criou 
     //essa função com o objetivo de comparar
     //dois dados, a vantagem é que a biblioteca
     //serve para qualquer tipo de dado
@@ -55,17 +55,20 @@
     void* top(LinkedList *list);
     bool isEmpty(LinkedList *list);
 
-    //IndexOf
-    //Devolver a posição baseado no dado
+    
+    //IndexOf:
+    //Curiosidade: O Registrador Contador de instrução, guarda o endereço da próxima instrução
+    //Esse endereço de memória pode ter o endereço de um dado
+    //ou de uma função.
+
+    
+    //Para resolver esse problema é criado um ponteiro
+    //de função para devolver a posição baseado no dado 
+
+    //Devolve a posição baseado no dado
     //Aqui trabalha somente com o endereço dos dados
     //quem usar a biblioteca, informa o tipo de dado.
-    //Para resolver esse problema é criado um ponteiro
-    //de função para devolver a posição baseado no dado
-
-    //Registrador Contador de instrução, guarda o endereço da próxima instrução
-    //Aquele endereço de memória pode ter o endereço de um dado
-    //ou de uma função
-    int indexOf(LinkedList *list, void *data, compare equal);
+    int indexOf(LinkedList *list, void *data, compare equal);//OK
 
     //Quer saber endereço do dado guardado
     //da posição escolhida
@@ -74,12 +77,12 @@
     //função utilitária internamente na lista
     //retorna o endereço do Node
     //pela posição informada 
-    Node* getNodeByPos(LinkedList *list, int pos);
+    Node* getNodeByPos(LinkedList *list, int pos);//OK
 
     //inserir na posição dada pelo usuário.
     //Deve-se percorrer até a pos-1 para conseguir 
     //adicionar o novo nó
-    int add(LinkedList *list, int pos, void *data);
+    int add(LinkedList *list, int pos, void *data);//OK
 
     //adiciona a lista de origem na lista destino 
     //ou seja o tail da lista origem vai no início da lista destino
@@ -90,6 +93,7 @@
     //remove o elemento baseado na posição
     void* removePos(LinkedList *list, int pos);
     
+    //remove o elemento baseado no dado
     bool removeData(LinkedList *list, void *data, compare equal);
 
     

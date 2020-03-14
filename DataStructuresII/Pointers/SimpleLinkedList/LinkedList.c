@@ -210,3 +210,58 @@ void* last(LinkedList *list){
         
 
  }
+
+//retorna o index do dado informado
+ int indexOf(LinkedList *list, void *data, compare equal){
+     
+     //se a lista está vazia retorna -1
+     if(isEmpty(list))return -1;
+     
+     //se o primeiro item do início é igual então retorna a pos 0
+     if(equal(list->tail->next,data)) return 0;
+
+     //Senão, o aux é criado e a lista é percorrida
+     //a partir do segundo elemento.
+     int i;
+
+     Node * aux;
+     aux = list->tail->next;
+     aux = aux->next;
+    
+     for(i=1;(aux != list->tail->next && !equal(aux->data,data)); i++, aux = aux->next);
+    
+    //Se o aux aponta o início, então percorreu a lista sem encontrar nada
+    return (aux == list->tail->next)?-1:i;
+ }
+
+ //remove o nó baseado no dado
+ bool removeData(LinkedList *list, void *data, compare equal){
+
+     if(isEmpty(list))return false;
+
+     if(equal(list->tail->next,data)){
+
+         Node * aux;
+         aux = list->tail->next;
+         list->tail->next = aux->next;
+         aux->data = 0;
+         aux->next = NULL;
+         free(aux);
+
+         return true;
+     }
+
+         Node * aux;
+         aux = list->tail->next;
+
+        for(int i = 0;(aux != list->tail && !equal(aux->next->data,data)); i++, aux = aux->next);
+    
+
+
+         list->tail->next = aux->next;
+         aux->data = 0;
+         aux->next = NULL;
+         free(aux);
+
+
+ }

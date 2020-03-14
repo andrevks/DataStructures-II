@@ -5,6 +5,16 @@
 /* Aqui o usuário pode criar uma função com retorno
 bool e dois parametros Void*/
 
+bool comparar(void *data0, void *data1){
+
+    //recebe o parâmetro e converte no 
+    //tipo de dado desejado 
+    int * d0 = (int*) data0;
+    int * d1 = (int*) data1;
+
+    return (*d0 == *d1)?true:false;
+}
+
 int main(){
   
     //criando uma linked list
@@ -40,19 +50,21 @@ int main(){
         // printf("list->tail->data= %d\n",*data1);
 
 
-      int * number3 = (int *) malloc(sizeof(int));
-          *number3 = 66;
-         x = add(&list,1,number3);
+    //   int * number3 = (int *) malloc(sizeof(int));
+    //       *number3 = 66;
+    //      x = add(&list,1,number3);
 
-          (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
+    //       (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
 
 
+    int * number4 = (int*) malloc(sizeof(int));
+    *number4 = 3333;
     
 
- 
+    printf("IndexOf:%d\n",indexOf(&list,number4,comparar));
 
-    while(!isEmpty(&list))
-        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
+    // while(!isEmpty(&list))
+    //     printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
      
     
 
@@ -60,28 +72,6 @@ int main(){
     //  printf("LAST:%d\n",*((int*)last(&list)));
 
     
-   
-
-
-    
-
-
-
-    // printf("Tail Real Address: %p\n",(&list.tail));
-    // printf("Pointed Tail Address: %p\n",(list.tail));
-    // printf("Real Next Address: %p\n",(&list.tail->next));
-
-    //  init(&list);
-    // printf("\n-----------------\n");
-
-    // printf("Tail Real Address: %p\n",(&list.tail));
-    // printf("Pointed Tail Address: %p\n",(list.tail));
-    // printf("Real Next Address: %p\n",(&list.tail->next));
-    // printf("Data from the Address pointed:%p\n",list.tail->data);
-    // printf("Next pointed Address :%p\n",list.tail->next);
- 
-   
-
     return 0;
 }
 
