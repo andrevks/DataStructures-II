@@ -19,16 +19,17 @@ int main(){
   
     //criando uma linked list
    LinkedList list;
+   LinkedList list2;
    int x;
 
     init(&list);
+    init(&list2);
     //Como se usa o tipo Void, deve-se alocar um endereço de memória
     //sempre quando retornar algum dado, deve-se converter para o tipo do dado guardado
   
    //usando o malloc para alocar memória  do tipo inteiro
      int *number = (int *) malloc(sizeof(int));
         *number = 55;
-        printf("number:%d\n",*number);
       
 
          x = push(&list,number);
@@ -46,6 +47,8 @@ int main(){
          x = push(&list,number2);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
+    
+
         //    int * data1 = (int*) (list.tail->data);
         // printf("list->tail->data= %d\n",*data1);
 
@@ -57,19 +60,52 @@ int main(){
     //       (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
 
 
-    int * number4 = (int*) malloc(sizeof(int));
-    *number4 = 3333;
+    //  int * number4 = (int*) malloc(sizeof(int));
+    //  *number4 = 12312321;
     
 
-    printf("IndexOf:%d\n",indexOf(&list,number4,comparar));
+    //  printf("IndexOf:%d\n",removeData(&list,number4,comparar));
 
-    // while(!isEmpty(&list))
-    //     printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
+
+
+    
+
+    printf("\n----------\n");
+    int *number10 = (int *) malloc(sizeof(int));
+        *number10 = 10;
+      
+
+         x = push(&list2,number10);
+        (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
      
+
+     int * number11 = (int *) malloc(sizeof(int));
+         *number11 = 11;
+         x = push(&list2,number11);
+
+         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
+
+      int * number12 = (int *) malloc(sizeof(int));
+          *number12 = 12;
+         x = push(&list2,number12);
+        (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
     
+     x = addAll(&list,0,&list2);
+      printf("Elementos Inseridos:%d\n",x);
+
+    
+     printf("First: %d\n ",*((int*)first(&list2)));
+    printf("Last: %d\n ",*((int*)last(&list2)));
+
+      printf("First: %d\n ",*((int*)first(&list)));
+    printf("Last: %d\n ",*((int*)last(&list)));
+   
+
+       while(!isEmpty(&list))
+       printf("valor retirado: %d\n ",*((int*)dequeue(&list)));  
 
 
-    //  printf("LAST:%d\n",*((int*)last(&list)));
+
 
     
     return 0;

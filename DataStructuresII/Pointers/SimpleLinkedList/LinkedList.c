@@ -88,7 +88,7 @@ int enqueue(LinkedList *list, void *data){
 void * dequeue(LinkedList *list){
     /*Para remover, deve-se retirar do início*/
       Node * aux;
-
+    printf(">>size:%d\n",list->size);
     if(!isEmpty(list)){
         //aux aponta para o primeiro
         aux = list->tail->next;
@@ -104,6 +104,7 @@ void * dequeue(LinkedList *list){
         list->size--;
         return data;
     }
+
        return NULL;
    
 }
@@ -116,10 +117,10 @@ int push(LinkedList *list, void *data){
 //função retirar 
 void * pop(LinkedList *list){
 
-    Node * aux;
+   
 
     if(!isEmpty(list)){
-
+         Node * aux;
         aux = list->tail->next;
 
         while (aux->next != list->tail) 
@@ -128,7 +129,7 @@ void * pop(LinkedList *list){
           aux->next = list->tail->next; 
           void * data = list->tail->data;
 
-          free(list->tail);
+        //   free(list->tail);
 
           list->tail = aux;
 
@@ -169,7 +170,7 @@ void* last(LinkedList *list){
         //senão, é criado um aux que receberá um nó anterior 
         //à posição desejada
 
-        Node * aux =getNodeByPos(list,(pos-1));
+        Node * aux = getNodeByPos(list,(pos-1));
         //se houver algum erro retorna 0
         if(aux == NULL)return 0; 
         
@@ -204,7 +205,7 @@ void* last(LinkedList *list){
         //enquanto a condição do meio acontecer o loop continua
         //Aux aponta para os nós e incrementa o count
 
-        for(int count = 0; (aux != list->tail && pos!= count); count++, aux = aux->next);
+        for(int count = 0; (aux != list->tail && pos != count); count++, aux = aux->next);
     
         return aux;
         
@@ -218,7 +219,7 @@ void* last(LinkedList *list){
      if(isEmpty(list))return -1;
      
      //se o primeiro item do início é igual então retorna a pos 0
-     if(equal(list->tail->next,data)) return 0;
+     if(equal(list->tail->next->data,data)) return 0;
 
      //Senão, o aux é criado e a lista é percorrida
      //a partir do segundo elemento.
@@ -237,31 +238,90 @@ void* last(LinkedList *list){
  //remove o nó baseado no dado
  bool removeData(LinkedList *list, void *data, compare equal){
 
+     //testa se a lista está vazia
      if(isEmpty(list))return false;
 
-     if(equal(list->tail->next,data)){
+    //Se o dado do inicio for igual 
+     if(equal(list->tail->next->data,data)){
 
          Node * aux;
          aux = list->tail->next;
          list->tail->next = aux->next;
-         aux->data = 0;
+
          aux->next = NULL;
+         free(aux->data);
          free(aux);
+
+         list->size--;
 
          return true;
      }
 
+        //senão
          Node * aux;
+         Node * remove;
+
          aux = list->tail->next;
 
-        for(int i = 0;(aux != list->tail && !equal(aux->next->data,data)); i++, aux = aux->next);
-    
+        //A lista é percorrida até chegar ao final ou até achar o dado
+        for(int i = 0;(aux->next != list->tail->next && !equal(aux->next->data,data)); i++, aux = aux->next);
 
+        //caso a lista for percorrida até voltar ao início, retorna-se falso   
+        if(aux->next == list->tail->next)return false;
+       
+        //caso achou algum valor:
+        remove = aux->next;
 
-         list->tail->next = aux->next;
-         aux->data = 0;
-         aux->next = NULL;
-         free(aux);
+        //Se for o último, o Tail tem que apontar para o penúltimo
+        if(aux->next == list->tail)list->tail = aux;
+        aux->next = remove->next;
+       
+        remove->next = NULL;
+        free(remove->data);
+        free(remove);
+        list->size--;  
 
-
+        return true;
  }
+
+  int addAll(LinkedList *listDest, int pos, LinkedList *listSource){
+
+         if(isEmpty(listDest) ||  pos >= listDest->size) return -1;
+         if(isEmpty(listSource) ||  pos >= listSource->size) return -2;
+       
+        // Node *aux = getNodeByPos(listDest,(pos-1));
+        // if(aux==NULL)return -1;
+
+        // listSource->tail->next = aux->next;
+        // aux->next = listSource->tail->next->next;
+        // listDest->size += listSource->size;
+        // return listSource->size;
+
+        if(pos == 0){
+
+            printf("listSource->tail: %p\n",listSource->tail);
+            printf("listSource->tail->next: %p\n",listSource->tail->next);
+            printf("listDest->tail->next: %p\n",listDest->tail->next);
+            printf("listDest->tail: %p\n",listDest->tail);
+            printf("\n listDest->size: %d",listDest->size);
+            printf("\n--------------\n");
+          
+            Node * aux;
+            aux = listSource->tail->next;
+
+            listSource->tail->next = listDest->tail->next;
+
+            listSource->tail->next = aux;
+
+            listDest->tail->next = listSource->tail->next;
+        
+           
+        }
+
+      
+      
+      
+     listDest->size += listSource->size;
+     return listSource->size;
+      
+  }

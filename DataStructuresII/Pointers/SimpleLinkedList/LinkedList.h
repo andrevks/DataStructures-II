@@ -84,7 +84,7 @@
     //adicionar o novo nó
     int add(LinkedList *list, int pos, void *data);//OK
 
-    //adiciona a lista de origem na lista destino 
+    //Adiciona a lista de origem na lista destino 
     //ou seja o tail da lista origem vai no início da lista destino
     //Depois início do destino aponta para o final da lista origem 
     //importante incrementar o size na lista de destino 
@@ -94,7 +94,7 @@
     void* removePos(LinkedList *list, int pos);
     
     //remove o elemento baseado no dado
-    bool removeData(LinkedList *list, void *data, compare equal);
+    bool removeData(LinkedList *list, void *data, compare equal);//OK
 
     
    
