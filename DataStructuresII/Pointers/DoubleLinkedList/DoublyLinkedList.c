@@ -33,11 +33,7 @@ void init(DoublyLinkedList *list){
 bool isEmpty(DoublyLinkedList *list){
 
     //Se o tamanho é igual a zero a lista está vazia
-    if(list->size == 0){
-        return true;
-    }else{
-        return false;
-    }
+    return (list->size == 0);
 }
 
 //inserir na fila
@@ -52,15 +48,13 @@ int enqueue(DoublyLinkedList *list, void *data){
     Node * new_node = (Node *)(malloc(sizeof(Node)));
     if(new_node == NULL) return -2;
 
-        //novo nó aponta para o início
+        //novo nó aponta para o início, após o trashNode
         new_node->data = data;
         new_node->next = list->tail->next;
+        new_node->previous = list->tail->previous;
         list->tail->next->previous = new_node;
-        new_node->previous = list->tail;
+        list->tail->next = new_node; 
 
-        //inicio aponta para o novo nó
-        list->tail->next = new_node;
-        //Tail aponta para o último
         list->tail = new_node;
 
         list->size++;

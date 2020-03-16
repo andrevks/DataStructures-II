@@ -30,44 +30,44 @@ int main(){
         printf("number:%d\n",*number);
       
 
-         x = push(&list,number);
+         x = enqueue(&list,number);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
      
 
      int * number1 = (int *) malloc(sizeof(int));
          *number1 = 77;
-         x = push(&list,number1);
+         x = enqueue(&list,number1);
 
          (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
       int * number2 = (int *) malloc(sizeof(int));
           *number2 = 99;
-         x = push(&list,number2);
-        (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
+         x = enqueue(&list,number2);
+        (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
         //    int * data1 = (int*) (list.tail->data);
         // printf("list->tail->data= %d\n",*data1);
 
     
 
-    // while(!isEmpty(&list))
-    //     printf("valor retirado: %d\n ",*((int*)pop(&list)));
+    while(!isEmpty(&list))
+        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
         
     //    printf("Last:%d\n",*((int*)last(&list)));
         //    printf("First:%d\n",*((int*)first(&list)));
         // printf("Top:%d\n",*((int*)top(&list)));
 
 
-      int * number4 = (int *) malloc(sizeof(int));
-          *number4 = 10;
+    //   int * number4 = (int *) malloc(sizeof(int));
+    //       *number4 = 10;
 
     //     x = add(&list,1,number4);
     //     (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
     // while(!isEmpty(&list))
     //     printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
 
-    x = indexOf(&list,number4,comparar);
-    printf("IndexOf:%d",x);
+    // x = indexOf(&list,number4,comparar);
+    // printf("IndexOf:%d",x);
 
     return 0;
 }
