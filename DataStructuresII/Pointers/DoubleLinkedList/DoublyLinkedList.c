@@ -108,30 +108,27 @@ int push(DoublyLinkedList *list, void *data){
 
 void * pop(DoublyLinkedList *list){
 
-    Node * aux;
+   
 
-    if(!isEmpty(list)) return NULL;
+    if(isEmpty(list)) return NULL;
+        
+        Node * remove;
+        Node * aux;
 
-    
+        remove = list->tail;
+        aux = remove->previous;
+        aux->next = list->tail->next;
+        list->tail = aux;
+        list->tail->next->previous = list->tail;
+        
+        remove->next = NULL;
+        remove->next = NULL;
 
-
-
-        // aux = list->tail->next;
-
-        // while (aux->next != list->tail) aux = aux->next;
-
-
-        //   aux->next = list->tail->next; 
-          
-        //   void * data = list->tail->data;
-
-        //   free(list->tail);
-
-        //   list->tail = aux;
+        void * data = remove->data;
+        free(remove);
+        list->size--;
 
           return data;
-    
-
 }
 
 //consulta o último item da pilha
@@ -146,7 +143,7 @@ void* first(DoublyLinkedList *list){
 
     //Retorna NULL caso a lista esteja fazia
     //Senão retorna o endereço do dado
-    return (isEmpty(list))?NULL:list->tail->next->data;
+    return (isEmpty(list))?NULL:list->tail->next->next->data;
 }
 //Consulta o último item da lista
 void* last(DoublyLinkedList *list){
@@ -170,12 +167,13 @@ void* last(DoublyLinkedList *list){
         new_node->data = data;
 
         new_node->next = aux->next;
+        aux->next->previous = new_node;
+        new_node->previous = aux;
         aux->next = new_node;
 
         list->size++;
 
         return 1;
-
  }
 
   Node* getNodeByPos(DoublyLinkedList *list, int pos){
