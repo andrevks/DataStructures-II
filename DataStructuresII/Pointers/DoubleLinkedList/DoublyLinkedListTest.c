@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkedList.h"
+#include "DoublyLinkedList.h"
 
 /* Aqui o usuário pode criar uma função com retorno
 bool e dois parametros Void*/
@@ -8,7 +8,7 @@ bool e dois parametros Void*/
 int main(){
   
     //criando uma linked list
-   LinkedList list;
+   DoublyLinkedList list;
    int x;
 
     init(&list);
@@ -17,7 +17,7 @@ int main(){
   
    //usando o malloc para alocar memória  do tipo inteiro
      int *number = (int *) malloc(sizeof(int));
-        *number = 0;
+        *number = 88;
         printf("number:%d\n",*number);
       
 
@@ -41,8 +41,8 @@ int main(){
 
     
 
-    // while(!isEmpty(&list))
-    //     printf("valor retirado: %d\n ",*((int*)pop(&list)));
+    while(!isEmpty(&list))
+        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
 
     // printf("Last:%d\n",*((int*)last(&list)));
     

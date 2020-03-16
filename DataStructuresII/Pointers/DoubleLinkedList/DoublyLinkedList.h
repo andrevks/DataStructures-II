@@ -1,5 +1,5 @@
-    #ifndef DataStructure_LinkedList_h
-    #define DataStructure_LinkedList_h
+    #ifndef DataStructure_DoublyLinkedList_h
+    #define DataStructure_DoublyLinkedList_h
 
     enum boolean {
         true = 1, false = 0
