@@ -88,7 +88,8 @@ int enqueue(LinkedList *list, void *data){
 void * dequeue(LinkedList *list){
     /*Para remover, deve-se retirar do início*/
       Node * aux;
-    printf(">>size:%d\n",list->size);
+
+
     if(!isEmpty(list)){
         //aux aponta para o primeiro
         aux = list->tail->next;
@@ -120,16 +121,19 @@ void * pop(LinkedList *list){
    
 
     if(!isEmpty(list)){
+
          Node * aux;
+         //aux aponta para o ínicio da lista
         aux = list->tail->next;
 
+        //percorre até o próximo ser o último da lista
         while (aux->next != list->tail) 
             aux = aux->next;
 
           aux->next = list->tail->next; 
           void * data = list->tail->data;
 
-        //   free(list->tail);
+          free(list->tail);
 
           list->tail = aux;
 
@@ -306,12 +310,9 @@ void* last(LinkedList *list){
             printf("\n listDest->size: %d",listDest->size);
             printf("\n--------------\n");
           
-            Node * aux;
-            aux = listSource->tail->next;
 
             listSource->tail->next = listDest->tail->next;
-
-            listDest->tail->next = aux;
+            listDest->tail->next = listSource->tail;
         
            
         }

@@ -51,7 +51,8 @@ int enqueue(DoublyLinkedList *list, void *data){
         //novo nó aponta para o início, após o trashNode
         new_node->data = data;
         new_node->next = list->tail->next;
-        new_node->previous = list->tail->previous;
+        // new_node->previous = list->tail->previous;//??
+        new_node->previous = list->tail;
         list->tail->next->previous = new_node;
         list->tail->next = new_node; 
 

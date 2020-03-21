@@ -89,13 +89,17 @@ int main(){
           *number12 = 12;
          x = push(&list2,number12);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
-    
-     x = addAll(&list,0,&list2);
-      printf("Elementos Inseridos:%d\n",x);
+
+    //     printf("First: %d\n ",*((int*)first(&list2)));
+
+    // printf("Last: %d\n ",*((int*)last(&list2)));
+
+    //  x = addAll(&list,0,&list2);
+    //   printf("Elementos Inseridos:%d\n",x);
 
     
-     printf("First: %d\n ",*((int*)first(&list2)));
-    printf("Last: %d\n ",*((int*)last(&list2)));
+    //  printf("First: %d\n ",*((int*)first(&list2)));
+    // printf("Last: %d\n ",*((int*)last(&list2)));
 
       printf("First: %d\n ",*((int*)first(&list)));
     printf("Last: %d\n ",*((int*)last(&list)));
@@ -103,6 +107,10 @@ int main(){
 
        while(!isEmpty(&list))
        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));  
+
+
+    //    while(!isEmpty(&list2))
+    //    printf("valor retirado: %d\n ",*((int*)dequeue(&list2)));  
 
 
 

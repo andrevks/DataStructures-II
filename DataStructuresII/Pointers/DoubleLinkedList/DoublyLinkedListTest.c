@@ -51,7 +51,7 @@ int main(){
     
 
     while(!isEmpty(&list))
-        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
+        printf("valor retirado: %d\n ",*((int*)pop&list)));
         
     //    printf("Last:%d\n",*((int*)last(&list)));
         //    printf("First:%d\n",*((int*)first(&list)));
