@@ -30,9 +30,7 @@ int main(){
    //usando o malloc para alocar memória  do tipo inteiro
      int *number = (int *) malloc(sizeof(int));
 
-        *number = 55;
-
-      
+        *number = 101;
 
          x = push(&list,number);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
@@ -40,7 +38,7 @@ int main(){
 
      int * number1 = (int *) malloc(sizeof(int));
 
-         *number1 = 77;
+         *number1 = 102;
 
          x = push(&list,number1);
 
@@ -48,35 +46,16 @@ int main(){
 
       int * number2 = (int *) malloc(sizeof(int));
 
-          *number2 = 99;
+          *number2 = 103;
          x = push(&list,number2);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
 
     
+        printf("First: %d\n ",*((int*)first(&list)));
+        printf("Last: %d\n ",*((int*)last(&list)));
+   
 
-
-
-        //    int * data1 = (int*) (list.tail->data);
-        // printf("list->tail->data= %d\n",*data1);
-
-
-    //   int * number3 = (int *) malloc(sizeof(int));
-    //       *number3 = 66;
-    //      x = add(&list,1,number3);
-
-    //       (x == 1)?printf("Inserido!!\n"):printf("Não inserido!!\n"); 
-
-
-    //  int * number4 = (int*) malloc(sizeof(int));
-    //  *number4 = 12312321;
-    
-
-    //  printf("IndexOf:%d\n",removeData(&list,number4,comparar));
-
-
-
-    
 
 
     printf("\n----------\n");
@@ -99,20 +78,15 @@ int main(){
          x = push(&list2,number12);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
-    //     printf("First: %d\n ",*((int*)first(&list2)));
+        // x = addAll(&list,2,&list2);
+        //  printf("\nElements Added: %d\n",x);
 
-    // printf("Last: %d\n ",*((int*)last(&list2)));
 
-    //  x = addAll(&list,0,&list2);
-    //   printf("Elementos Inseridos:%d\n",x);
 
-    
-    //  printf("First: %d\n ",*((int*)first(&list2)));
-    // printf("Last: %d\n ",*((int*)last(&list2)));
-
-      printf("First: %d\n ",*((int*)first(&list)));
-    printf("Last: %d\n ",*((int*)last(&list)));
-   
+        printf("First: %d\n ",*((int*)first(&list)));
+        printf("Last: %d\n ",*((int*)last(&list)));
+        int pos = 0;
+         printf("Dado da posição %d removido é : %d\n",pos,*((int*)removePos(&list,pos)));
 
        while(!isEmpty(&list))
        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));  

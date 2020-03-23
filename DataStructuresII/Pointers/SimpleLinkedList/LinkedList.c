@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
+int conta = 0;
 
 //Inicializando a lista
 void init(LinkedList *list){
@@ -45,13 +46,20 @@ int enqueue(LinkedList *list, void *data){
 
 
     /*Adicina-se sempre no final, que é o tail.
-    Quando deseja-se acessar o início, digita-se tail->next*/
+    Quando deseja-se acessar o início, digita-se list->tail->next*/
 
     //Uma nova área da memória, suficiente para armazenar um nó
     //é  reservada usando malloc
-
     Node * new_node = (Node *)(malloc(sizeof(Node)));
     if(new_node == NULL) return 0;
+
+    conta++;
+
+
+    // printf("\nnew_node->next      -   list->tail->next     -   list->tail  - new_node\n");
+    // printf("%p       -     %p     -   %p    -   %p\n",new_node->next,list->tail->next,list->tail,new_node);
+    // printf("%d element(s) added",conta);
+    // printf("\n");
 
     if(isEmpty(list)){
         
@@ -60,29 +68,37 @@ int enqueue(LinkedList *list, void *data){
           list->tail = new_node;
 
           //O Tail->next aponta para o último, pois nesse momento
-
+          //há apenas um elemento
           list->tail->next = list->tail;
           list->size++;
 
     }else{
+
         //sempre começa apontando o novo nó para a lista
         //para não haver risco de perder o endereço da lista
-
 
         //novo nó aponta para o início
         new_node->data = data;
         new_node->next = list->tail->next;
         //inicio aponta para o novo nó
         list->tail->next = new_node;
-        //Tail aponta para o último
+        // printf("\nMiddle of the process\n");
+        // printf("\n new_node->next      -   list->tail->next     -   list->tail\n");
+        // printf("%p       -     %p     -   %p\n",new_node->next,list->tail->next,list->tail);
+        //Tail aponta para o último 
+        //e o tail->next apontará para 
+        //o next do new_node
         list->tail = new_node;
+ 
 
         list->size++;
     }
 
+    // printf("\n new_node->next      -   list->tail->next     -   list->tail\n");
+    // printf("%p       -     %p     -   %p\n",new_node->next,list->tail->next,list->tail);
+    // printf("\n----------------------------------\n");
 
     //Representa a quantidade de elementos inseridos
-
     return 1;
    
 
@@ -92,12 +108,21 @@ int enqueue(LinkedList *list, void *data){
 void * dequeue(LinkedList *list){
     /*Para remover, deve-se retirar do início*/
       Node * aux;
-
+    // printf("\n()()()()()()()()()()()()()()()()()\n");
+    // printf("\nlist->tail->next    -   list->tail\n");
+    // printf(" %p     -   %p\n",list->tail->next,list->tail);
+    // printf("Left: %d",conta);
+    // printf("\n");
     if(!isEmpty(list)){
+        conta--;
         //aux aponta para o primeiro
         aux = list->tail->next;
         //list->tail->next aponta para o próximo
         list->tail->next = aux->next;
+
+        // printf("\n aux                -     aux->next          -     list->tail->next   -   list->tail\n");
+        // printf("%p      -     %p     -     %p     -   %p\n",aux,aux->next,list->tail->next,list->tail);
+        // printf("\n----------------------------------\n");
         //o aux-> não aponta mais para o próximo
         aux->next = NULL;
 
@@ -106,9 +131,16 @@ void * dequeue(LinkedList *list){
         free(aux);
 
         list->size--;
+
+     
+
         return data;
     }
 
+        // printf("\n>>>>>>NULL<<<<<<\n");
+        // printf("\n aux      -   aux->next    -   list->tail->next     -   list->tail\n");
+        // printf("%p      -     %p     -     %p     -   %p\n",aux,aux->next,list->tail->next,list->tail);
+        // printf("\n----------------------------------\n");
 
        return NULL;
    
@@ -297,35 +329,52 @@ void* last(LinkedList *list){
 
          if(isEmpty(listDest) ||  pos >= listDest->size) return -1;
          if(isEmpty(listSource) ||  pos >= listSource->size) return -2;
-       
-        // Node *aux = getNodeByPos(listDest,(pos-1));
-        // if(aux==NULL)return -1;
-
-        // listSource->tail->next = aux->next;
-        // aux->next = listSource->tail->next->next;
-        // listDest->size += listSource->size;
-        // return listSource->size;
 
         if(pos == 0){
-
-            printf("listSource->tail: %p\n",listSource->tail);
-            printf("listSource->tail->next: %p\n",listSource->tail->next);
-            printf("listDest->tail->next: %p\n",listDest->tail->next);
-            printf("listDest->tail: %p\n",listDest->tail);
-            printf("\n listDest->size: %d",listDest->size);
-            printf("\n--------------\n");
-          
+            
+            Node * inicioSource = listSource->tail->next;
 
             listSource->tail->next = listDest->tail->next;
-            listDest->tail->next = listSource->tail;
-        
-           
-        }
+            listDest->tail->next = inicioSource;
+            listDest->tail = listSource->tail;
 
-      
+        }else{
+
+            Node * aux = getNodeByPos(listDest,(pos-1));
+            Node * inicioSource = listSource->tail->next;
+            listSource->tail->next = aux->next;
+            aux->next = inicioSource;
+        }
+        
+
       
       
      listDest->size += listSource->size;
      return listSource->size;
       
   }
+
+
+ void* getPos(LinkedList *list, int pos){
+
+      Node * dataPos = getNodeByPos(list,pos);
+      return (dataPos == NULL)? NULL:dataPos->data;
+  }
+
+
+void* removePos(LinkedList *list, int pos){
+    
+    if(isEmpty(list) || pos >= list->size) return NULL;
+
+    Node * aux = getNodeByPos(list,(pos-1));
+    if(aux == NULL) return NULL;
+
+    Node * removeData = aux->next;
+    aux->next = removeData->next;
+    void *data = removeData->data;
+    
+    free(removeData);
+
+    list->size--;
+    return data;
+}

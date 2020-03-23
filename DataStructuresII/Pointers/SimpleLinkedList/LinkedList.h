@@ -45,15 +45,15 @@
 
     //Inicializa a lista
     //Caso fosse 
-    void init(LinkedList *list);
-    int enqueue(LinkedList *list, void *data);
-    void* dequeue(LinkedList *list);
-    void* first(LinkedList *list);
-    void* last(LinkedList *list);
-    int push(LinkedList *list, void *data);
-    void* pop(LinkedList *list);
-    void* top(LinkedList *list);
-    bool isEmpty(LinkedList *list);
+    void init(LinkedList *list);//ok
+    int enqueue(LinkedList *list, void *data);//ok
+    void* dequeue(LinkedList *list);//ok
+    void* first(LinkedList *list);//ok
+    void* last(LinkedList *list);//ok
+    int push(LinkedList *list, void *data);//ok
+    void* pop(LinkedList *list);//ok
+    void* top(LinkedList *list);//ok
+    bool isEmpty(LinkedList *list);//ok
 
     
     //IndexOf:
@@ -70,9 +70,8 @@
     //quem usar a biblioteca, informa o tipo de dado.
     int indexOf(LinkedList *list, void *data, compare equal);//OK
 
-    //Quer saber endereço do dado guardado
-    //da posição escolhida
-    void* getPos(LinkedList *list, int pos);
+    //retorna endereço do dado pela posição
+    void* getPos(LinkedList *list, int pos);//ok
     
     //função utilitária internamente na lista
     //retorna o endereço do Node
@@ -88,10 +87,10 @@
     //ou seja o tail da lista origem vai no início da lista destino
     //Depois início do destino aponta para o final da lista origem 
     //importante incrementar o size na lista de destino 
-    int addAll(LinkedList *listDest, int pos, LinkedList *listSource);
+    int addAll(LinkedList *listDest, int pos, LinkedList *listSource);//OK
 
-    //remove o elemento baseado na posição
-    void* removePos(LinkedList *list, int pos);
+    //remove o elemento de uma determinada posição
+    void* removePos(LinkedList *list, int pos);//OK
     
     //remove o elemento baseado no dado
     bool removeData(LinkedList *list, void *data, compare equal);//OK
