@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
-int conta = 0;
+
 
 //Inicializando a lista
 void init(LinkedList *list){
@@ -53,13 +53,6 @@ int enqueue(LinkedList *list, void *data){
     Node * new_node = (Node *)(malloc(sizeof(Node)));
     if(new_node == NULL) return 0;
 
-    conta++;
-
-
-    // printf("\nnew_node->next      -   list->tail->next     -   list->tail  - new_node\n");
-    // printf("%p       -     %p     -   %p    -   %p\n",new_node->next,list->tail->next,list->tail,new_node);
-    // printf("%d element(s) added",conta);
-    // printf("\n");
 
     if(isEmpty(list)){
         
@@ -82,9 +75,7 @@ int enqueue(LinkedList *list, void *data){
         new_node->next = list->tail->next;
         //inicio aponta para o novo nó
         list->tail->next = new_node;
-        // printf("\nMiddle of the process\n");
-        // printf("\n new_node->next      -   list->tail->next     -   list->tail\n");
-        // printf("%p       -     %p     -   %p\n",new_node->next,list->tail->next,list->tail);
+        
         //Tail aponta para o último 
         //e o tail->next apontará para 
         //o next do new_node
@@ -94,9 +85,6 @@ int enqueue(LinkedList *list, void *data){
         list->size++;
     }
 
-    // printf("\n new_node->next      -   list->tail->next     -   list->tail\n");
-    // printf("%p       -     %p     -   %p\n",new_node->next,list->tail->next,list->tail);
-    // printf("\n----------------------------------\n");
 
     //Representa a quantidade de elementos inseridos
     return 1;
@@ -108,24 +96,15 @@ int enqueue(LinkedList *list, void *data){
 void * dequeue(LinkedList *list){
     /*Para remover, deve-se retirar do início*/
       Node * aux;
-    // printf("\n()()()()()()()()()()()()()()()()()\n");
-    // printf("\nlist->tail->next    -   list->tail\n");
-    // printf(" %p     -   %p\n",list->tail->next,list->tail);
-    // printf("Left: %d",conta);
-    // printf("\n");
+ 
     if(!isEmpty(list)){
         conta--;
         //aux aponta para o primeiro
         aux = list->tail->next;
         //list->tail->next aponta para o próximo
         list->tail->next = aux->next;
-
-        // printf("\n aux                -     aux->next          -     list->tail->next   -   list->tail\n");
-        // printf("%p      -     %p     -     %p     -   %p\n",aux,aux->next,list->tail->next,list->tail);
-        // printf("\n----------------------------------\n");
         //o aux-> não aponta mais para o próximo
         aux->next = NULL;
-
         //Cria-se um var data para liberar o ponteiro aux
         void* data = aux->data;
         free(aux);
@@ -137,10 +116,6 @@ void * dequeue(LinkedList *list){
         return data;
     }
 
-        // printf("\n>>>>>>NULL<<<<<<\n");
-        // printf("\n aux      -   aux->next    -   list->tail->next     -   list->tail\n");
-        // printf("%p      -     %p     -     %p     -   %p\n",aux,aux->next,list->tail->next,list->tail);
-        // printf("\n----------------------------------\n");
 
        return NULL;
    

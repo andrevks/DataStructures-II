@@ -25,7 +25,7 @@
     }DoublyLinkedList;
 
     /*Por questões de legidibilidade, algumas funções são reutilizadas*/
-    //no LinkedListTest.c:
+    //no DoublyLinkedListTest.c:
     //Qualquer função que alguem implementar
     //que retorne boleano e os tipos
     //das funções sejam iguais 
@@ -47,15 +47,15 @@
 
     //Inicializa a lista
     //Caso fosse 
-void init(DoublyLinkedList *list);
-int enqueue(DoublyLinkedList *list, void *data);
-void* dequeue(DoublyLinkedList *list);
-void* first(DoublyLinkedList *list);
-void* last(DoublyLinkedList *list);
-int push(DoublyLinkedList *list, void *data);
-void* pop(DoublyLinkedList *list);
-void* top(DoublyLinkedList *list);
-bool isEmpty(DoublyLinkedList *list);
+    void init(DoublyLinkedList *list);
+    int enqueue(DoublyLinkedList *list, void *data);
+    void* dequeue(DoublyLinkedList *list);
+    void* first(DoublyLinkedList *list);
+    void* last(DoublyLinkedList *list);
+    int push(DoublyLinkedList *list, void *data);
+    void* pop(DoublyLinkedList *list);
+    void* top(DoublyLinkedList *list);
+    bool isEmpty(DoublyLinkedList *list);
 
     //IndexOf
     //Devolver a posição baseado no dado
@@ -94,6 +94,7 @@ bool isEmpty(DoublyLinkedList *list);
     bool removeData(DoublyLinkedList *list, void *data, compare equal);
 
     
-   
+     void show(DoublyLinkedList *list, printNode print);
+     void showMem(DoublyLinkedList *list);
    
     #endif

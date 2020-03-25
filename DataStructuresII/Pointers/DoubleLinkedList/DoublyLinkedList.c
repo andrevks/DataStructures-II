@@ -13,9 +13,7 @@ void init(DoublyLinkedList *list){
 
     //Verificando o sucesso da alocação
     //Tendo em vista que o malloc retorna NULL em caso de erro
-    if(trashNode == NULL){
-        printf("Erro ao alocar o trashNode");
-    }
+    if(trashNode == NULL)printf("Erro ao alocar o trashNode");
      
     //Apontando o dado para NULL
     //E o next para ele mesmo
@@ -40,24 +38,36 @@ bool isEmpty(DoublyLinkedList *list){
 int enqueue(DoublyLinkedList *list, void *data){
 
     /*Adicina-se sempre no final, que é o tail.
-    Quando deseja-se acessar o início, digita-se tail->next*/
+    Quando deseja-se acessar o início, digita-se list->tail->next*/
 
     //Uma nova área da memória, suficiente para armazenar um nó
     //é  reservada usando malloc
-
     Node * new_node = (Node *)(malloc(sizeof(Node)));
     if(new_node == NULL) return -2;
 
-        //novo nó aponta para o início, após o trashNode
+        
         new_node->data = data;
+        //new_node->next aponta para o início(trashNode)
         new_node->next = list->tail->next;
-        // new_node->previous = list->tail->previous;//??
+        //Previous aponta para o último
         new_node->previous = list->tail;
-        list->tail->next->previous = new_node;
+       
+        //Next do penúltimo da fila, deixa de apontar para o ínicio
+        //e aponta para o novo nó
         list->tail->next = new_node; 
-
+        
+        //tail aponta para o novo nó 
+        //tail->next e tail->previous são atualizados 
+        //com os endereços do next e previous
+        //contido no novo nó
         list->tail = new_node;
-
+        
+        //O previous do início(trashNode) deixa de apontar
+        //para o tail antigo e aponta para o novo,
+        //que contém o novo nó.
+        list->tail->next->previous = list->tail;
+         
+      
         list->size++;
 
     //Representa a quantidade de elementos inseridos

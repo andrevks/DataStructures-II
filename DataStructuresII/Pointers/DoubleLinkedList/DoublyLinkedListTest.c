@@ -26,8 +26,7 @@ int main(){
   
    //usando o malloc para alocar memória  do tipo inteiro
      int *number = (int *) malloc(sizeof(int));
-        *number = 88;
-        printf("number:%d\n",*number);
+        *number = 1001;
       
 
          x = enqueue(&list,number);
@@ -35,13 +34,13 @@ int main(){
      
 
      int * number1 = (int *) malloc(sizeof(int));
-         *number1 = 77;
+         *number1 = 1002;
          x = enqueue(&list,number1);
 
          (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
       int * number2 = (int *) malloc(sizeof(int));
-          *number2 = 99;
+          *number2 = 1003;
          x = enqueue(&list,number2);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
@@ -51,7 +50,7 @@ int main(){
     
 
     while(!isEmpty(&list))
-        printf("valor retirado: %d\n ",*((int*)pop&list)));
+        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
         
     //    printf("Last:%d\n",*((int*)last(&list)));
         //    printf("First:%d\n",*((int*)first(&list)));
