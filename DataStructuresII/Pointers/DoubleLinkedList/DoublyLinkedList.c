@@ -49,6 +49,7 @@ int enqueue(DoublyLinkedList *list, void *data){
         new_node->data = data;
         //new_node->next aponta para o início(trashNode)
         new_node->next = list->tail->next;
+
         //Previous aponta para o último
         new_node->previous = list->tail;
        
@@ -67,7 +68,6 @@ int enqueue(DoublyLinkedList *list, void *data){
         //que contém o novo nó.
         list->tail->next->previous = list->tail;
          
-      
         list->size++;
 
     //Representa a quantidade de elementos inseridos
@@ -79,7 +79,7 @@ void * dequeue(DoublyLinkedList *list){
 
        if(isEmpty(list))return NULL;
        
-    /*Para remover, deve-se retirar do início*/
+      /*Para remover, deve-se retirar do início*/
       Node * auxFirst;
       Node * trash;
       if(auxFirst == NULL)return NULL;
@@ -113,24 +113,34 @@ int push(DoublyLinkedList *list, void *data){
 
 void * pop(DoublyLinkedList *list){
 
-   
+   //Remove sempre no final
 
     if(isEmpty(list)) return NULL;
         
         Node * remove;
         Node * aux;
 
+        //remove aponta para o último
         remove = list->tail;
+        //A vantagem é poder ter o endereço do anterior
+        //sem transitar pela pilha
         aux = remove->previous;
+        //O  next do penúltimo, aponta para o início
         aux->next = list->tail->next;
+        //tail aponta o penúltimo, agora se torna o último
         list->tail = aux;
+
+        //o previous do início aponta para o último
         list->tail->next->previous = list->tail;
         
         remove->next = NULL;
         remove->next = NULL;
 
+        //nó é removido e o dado 
+        //atribuido para outra variável
         void * data = remove->data;
         free(remove);
+        
         list->size--;
 
           return data;
