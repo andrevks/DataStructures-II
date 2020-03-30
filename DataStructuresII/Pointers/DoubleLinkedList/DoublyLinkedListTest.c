@@ -14,6 +14,7 @@ bool comparar(void *data0, void *data1){
 
     return (*d0 == *d1)?true:false;
 }
+
 int main(){
   
     //criando uma linked list
@@ -46,11 +47,13 @@ int main(){
 
         //    int * data1 = (int*) (list.tail->data);
         // printf("list->tail->data= %d\n",*data1);
+    int *number3 =  (int*)malloc(sizeof(int));
+    *number3 = 1002;
+    printf("IndexOf:%d\n",indexOf(&list,number3,comparar));
 
-    
 
-    while(!isEmpty(&list))
-        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
+    // while(!isEmpty(&list))
+    //     printf("valor retirado: %d\n ",*((int*)pop(&list)));
         
     //    printf("Last:%d\n",*((int*)last(&list)));
         //    printf("First:%d\n",*((int*)first(&list)));

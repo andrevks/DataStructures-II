@@ -171,23 +171,33 @@ void* last(DoublyLinkedList *list){
 
  int add(DoublyLinkedList *list, int pos, void *data){
 
-
+        //Se a posição é menor ou igual a zero 
+        //o valor já é inserido na primeira posição
         if(pos <= 0)return push(list,data);
 
+        //senão, encontre-se o nó da posição anterior
+        //da que foi informada
         Node * aux = getNodeByPos(list,(pos-1));
         if(aux == NULL)return 0;
 
+        //Novo nó é alocado
         Node * new_node =(Node*) malloc(sizeof(Node));
 
         new_node->data = data;
-
+        //O next do novo nó aponta para o next do aux
+        //onde é a posição informada
         new_node->next = aux->next;
+        //O anterior do nó apontado, agora aponta
+        //para o novo nó
         aux->next->previous = new_node;
+        //o anterior do novo nó aponta para o aux
         new_node->previous = aux;
+        //o prox do aux aponta para o novo nó
         aux->next = new_node;
 
         list->size++;
 
+        //corresponde ao número de elementos adicionados 
         return 1;
  }
 
@@ -198,10 +208,10 @@ void* last(DoublyLinkedList *list){
         if(isEmpty(list) || pos >= list->size) return NULL;
 
 
-        //Se caso não acontecer, continuamos e o aux aponta para o início
+        //Se caso não acontecer, continua-se e o aux aponta para o início
         Node * aux = list->tail->next;
 
-        //o contador é criado
+        //O contador é criado
         //enquanto a condição do meio acontecer o loop continua
         //Aux aponta para os nós e incrementa o count
 
@@ -218,18 +228,26 @@ void* last(DoublyLinkedList *list){
      //se a lista está vazia retorna -1
      if(isEmpty(list))return -1;
      
-     //se o primeiro item do início é igual então retorna a pos 0
-     if(equal(list->tail->next->data,data)) return 0;
+     //se o primeiro item do início(após o trashNode) 
+     //é igual ao dado então retorna a pos 1
+     if(equal(list->tail->next->next->data,data)) return 1;
 
+     //Se é igual ao último então retorna o tamanho
+     if(equal(list->tail->data,data)) return list->size;
+     
      //Senão, o aux é criado e a lista é percorrida
      //a partir do segundo elemento.
      int i;
 
      Node * aux;
+     //Aux aponta para o início(trashNode)
      aux = list->tail->next;
      aux = aux->next;
-    
-     for(i=1;(aux != list->tail->next && !equal(aux->data,data)); i++, aux = aux->next);
+     aux = aux->next;
+     
+     //Percorre até o aux apontar para o início(trashNode)
+     //ou até o valor for igual
+     for(i=2;(aux != list->tail->next && !equal(aux->data,data)); i++, aux = aux->next);
     
     //Se o aux aponta o início, então percorreu a lista sem encontrar nada
     return (aux == list->tail->next)?-1:i;
