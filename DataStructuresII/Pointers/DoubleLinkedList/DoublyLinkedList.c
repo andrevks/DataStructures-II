@@ -205,22 +205,35 @@ void* last(DoublyLinkedList *list){
 
         //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
         //retorna NULL
-        if(isEmpty(list) || pos >= list->size) return NULL;
+        if(isEmpty(list) || pos > list->size) return NULL;
 
 
         //Se caso não acontecer, continua-se e o aux aponta para o início
-        Node * aux = list->tail->next;
+        //,ou seja, após o trashNode
+        Node * aux = list->tail->next->next;
 
         //O contador é criado
         //enquanto a condição do meio acontecer o loop continua
         //Aux aponta para os nós e incrementa o count
+        int count;   
+        for(count = 1; (aux != list->tail && pos != count); count++, aux = aux->next);
 
-        for(int count = 0; (aux != list->tail && pos != count); count++, aux = aux->next);
+        // printf("Size - Count    -    aux    -                 list->tail -          aux->next     -       list->tail->next\n");
+        // printf("%d    -   %d     -    %p     -    %p    -     %p   -   %p\n", list->size, count, aux, list->tail,aux->next, list->tail->next);
     
         return aux;
-        
-
  }
+
+ void* getPos(DoublyLinkedList *list, int pos){
+      //Nó é criado para receber o endereço do nó 
+      //que será procurando pelo getNodeByPos
+      Node * dataPos = getNodeByPos(list,pos);
+
+      //retorna-se NULL caso o dado não foi encontrado
+      //senão, retorna o dado do nó
+        
+      return (dataPos == NULL)? NULL: dataPos->data;
+  }
 
 //retorna o index do dado informado
  int indexOf(DoublyLinkedList *list, void *data, compare equal){
@@ -260,11 +273,15 @@ void* last(DoublyLinkedList *list){
      if(isEmpty(list))return false;
 
     //Se o dado do inicio for igual 
-     if(equal(list->tail->next->data,data)){
+     if(equal(list->tail->next->next->data,data)){
 
          Node * aux;
-         aux = list->tail->next;
-         list->tail->next = aux->next;
+         //Aux aponta para o ínicio(Após trashNode)
+         aux = list->tail->next->next;
+         //
+        //  list->tail->next = aux->next;
+        list->tail->next->next = aux->next;
+        aux->next->previous = list->tail->next;
 
          aux->next = NULL;
          free(aux->data);
@@ -302,42 +319,77 @@ void* last(DoublyLinkedList *list){
         return true;
  }
 
+
+
   int addAll(DoublyLinkedList *listDest, int pos, DoublyLinkedList *listSource){
 
-         if(isEmpty(listDest) ||  pos >= listDest->size) return -1;
-         if(isEmpty(listSource) ||  pos >= listSource->size) return -2;
-       
-        // Node *aux = getNodeByPos(listDest,(pos-1));
-        // if(aux==NULL)return -1;
+         if(isEmpty(listDest) ||  pos > listDest->size) return -1;
+         if(isEmpty(listSource) ||  pos > listSource->size) return -2;
 
-        // listSource->tail->next = aux->next;
-        // aux->next = listSource->tail->next->next;
-        // listDest->size += listSource->size;
-        // return listSource->size;
+        if( pos == 1){
+            // //1
+            // Node * inicioSource = listSource->tail->next;
+            // //2
+            // listSource->tail->next = listDest->tail->next;
+            // //3
+            //  //adc para teste
+            // listSource->tail->next->previous = listDest->tail;
 
-        if(pos == 0){
-
-            printf("listSource->tail: %p\n",listSource->tail);
-            printf("listSource->tail->next: %p\n",listSource->tail->next);
-            printf("listDest->tail->next: %p\n",listDest->tail->next);
-            printf("listDest->tail: %p\n",listDest->tail);
-            printf("\n listDest->size: %d",listDest->size);
-            printf("\n--------------\n");
-          
-            Node * aux;
-            aux = listSource->tail->next;
-
-            listSource->tail->next = listDest->tail->next;
-
-            listDest->tail->next = aux;
-        
+            // listDest->tail->next = inicioSource;
            
-        }
 
-      
+            // listDest->tail = listSource->tail;
+
+            // listDest->tail->next->previous = listDest->tail;
+            // listDest->tail->next = listSource->tail->next;
+
+
+            //-----------------------------------------
+            Node * inicioSource = listSource->tail->next;
+            Node * finalSource = listSource->tail;
+
+            Node * inicioDest = listDest->tail->next;
+
+            listSource->tail->next = inicioDest->next;
+
+            listSource->tail->next->previous = inicioDest;
+
+            inicioDest->next->previous = finalSource;
+            
+            inicioDest->next = inicioSource;
+
+        }
+        else{
+
+            Node * aux = getNodeByPos(listDest,(pos-1));
+            Node * inicioSource = listSource->tail->next;
+            listSource->tail->next = aux->next;
+            aux->next = inicioSource;
+        }
+        
+
       
       
      listDest->size += listSource->size;
      return listSource->size;
       
   }
+
+
+
+void* removePos(DoublyLinkedList *list, int pos){
+    
+    if(isEmpty(list) || pos >= list->size) return NULL;
+
+    Node * aux = getNodeByPos(list,(pos-1));
+    if(aux == NULL) return NULL;
+
+    Node * removeData = aux->next;
+    aux->next = removeData->next;
+    void *data = removeData->data;
+    
+    free(removeData);
+
+    list->size--;
+    return data;
+}

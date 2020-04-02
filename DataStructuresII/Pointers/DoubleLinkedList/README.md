@@ -26,7 +26,7 @@ int indexOf(DoublyLinkedList *list,void *data, compare equal);:white_check_mark:
 
 Node* getNodeByPos(DoublyLinkedList *list,int pos);:white_check_mark:
 
-void* getPos(DoublyLinkedList *list,int pos);
+void* getPos(DoublyLinkedList *list,int pos);:white_check_mark:
 
 int add(DoublyLinkedList *list, int pos, void *data);:white_check_mark:
 
