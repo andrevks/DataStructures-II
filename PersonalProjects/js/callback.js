@@ -26,13 +26,7 @@ function getPosts() {
 
     }, 1000);
 }
-// function createPost(post){
-//     setTimeout(()=>{
-//         //Take posts and push on to the push array
-//         //the new post
-//         posts.push(posts);
-//     },2000);
-// }
+
 
 function createPost(post, callback){
     setTimeout(()=>{
