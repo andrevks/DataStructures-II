@@ -218,8 +218,6 @@ void* last(DoublyLinkedList *list){
         int count;   
         for(count = 1; (aux != list->tail && pos != count); count++, aux = aux->next);
 
-        // printf("Size - Count    -    aux    -                 list->tail -          aux->next     -       list->tail->next\n");
-        // printf("%d    -   %d     -    %p     -    %p    -     %p   -   %p\n", list->size, count, aux, list->tail,aux->next, list->tail->next);
     
         return aux;
  }
@@ -326,46 +324,70 @@ void* last(DoublyLinkedList *list){
          if(isEmpty(listDest) ||  pos > listDest->size) return -1;
          if(isEmpty(listSource) ||  pos > listSource->size) return -2;
 
-        if( pos == 1){
-            // //1
-            // Node * inicioSource = listSource->tail->next;
-            // //2
-            // listSource->tail->next = listDest->tail->next;
-            // //3
-            //  //adc para teste
-            // listSource->tail->next->previous = listDest->tail;
+        // if( pos == 1 || pos == 0){
+        //     // //1
+        //     // Node * inicioSource = listSource->tail->next;
+        //     // //2
+        //     // listSource->tail->next = listDest->tail->next;
+        //     // //3
+        //     //  //adc para teste
+        //     // listSource->tail->next->previous = listDest->tail;
 
-            // listDest->tail->next = inicioSource;
+        //     // listDest->tail->next = inicioSource;
            
 
-            // listDest->tail = listSource->tail;
+        //     // listDest->tail = listSource->tail;
 
-            // listDest->tail->next->previous = listDest->tail;
-            // listDest->tail->next = listSource->tail->next;
+        //     // listDest->tail->next->previous = listDest->tail;
+        //     // listDest->tail->next = listSource->tail->next;
 
+        //     //-----------------------------------------
+        //     Node * inicioSource = listSource->tail->next;
+        //     Node * finalSource = listSource->tail;
 
-            //-----------------------------------------
-            Node * inicioSource = listSource->tail->next;
-            Node * finalSource = listSource->tail;
+        //     Node * finalDest = listDest->tail;
+        //     Node * inicioDest = listDest->tail->next;
+        //     printf("PASSOU!!!\n");
 
-            Node * inicioDest = listDest->tail->next;
+        //     //Aponta o início do Source ao nó após o trash node
+        //     listSource->tail->next = listDest->tail->next->next;
 
-            listSource->tail->next = inicioDest->next;
+        //     //Aponta o anterior do Source ao início(trashNode) do dest
+        //     listSource->tail->next->previous = listDest->tail->next;
 
-            listSource->tail->next->previous = inicioDest;
-
-            inicioDest->next->previous = finalSource;
+        //     //O previous do nó após o início aponta para o final da ListSource
+        //     listDest->tail->next->next->previous = finalSource;
             
-            inicioDest->next = inicioSource;
+        //     //Next do início aponta para o início da listSource
+        //     listDest->tail->next->next = inicioSource;
 
-        }
-        else{
+        //     listDest->tail = finalDest;
+        //     listDest->tail->next = inicioDest;
+        // }
+        // else{
+
+            //Antes de tudo é necessário remover o trashNode do source
+            Node * trashNodeSource = listSource->tail->next;
+
+            trashNodeSource->next->previous = listSource->tail;
+            listSource->tail->next = trashNodeSource->next;
+
+            trashNodeSource->next = NULL;
+
+            free(trashNodeSource);
+
+
 
             Node * aux = getNodeByPos(listDest,(pos-1));
             Node * inicioSource = listSource->tail->next;
+
             listSource->tail->next = aux->next;
+            listSource->tail->next->previous = aux;
+            
+            aux->next->previous = listSource->tail;
             aux->next = inicioSource;
-        }
+            
+        // }
         
 
       

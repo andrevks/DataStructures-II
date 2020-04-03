@@ -79,10 +79,11 @@ int main(){
 
       x = addAll(&list,1,&list2);
 
-      printf("\nElementos inseridos: %d\n",x);
+    printf("\nElementos inseridos: %d\n",x);
 
-    //    printf("INICIO: %d\n ",*((int*)first(&list)));
-    //   printf("FINAL: %d\n ",*((int*)last(&list)));
+    printf(" Após addAll:\n");
+    printf("INICIO: %d\n ",*((int*)first(&list)));
+    printf("FINAL: %d\n ",*((int*)last(&list)));
 
     while(!isEmpty(&list))
         printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
