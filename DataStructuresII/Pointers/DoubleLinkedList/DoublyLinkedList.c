@@ -377,4 +377,36 @@ bool removeData(DoublyLinkedList *list, void *data, compare equal){
         return true;
  }
 
+ void show(DoublyLinkedList *list, printNode print){
+
+     Node * aux = list->tail->next->next;
+
+     printf("\nImpressão dos dados de cada nó");
+     printf("\n------------------------------\n");
+
+     while(aux != list->tail->next){
+          print(aux->data);
+          aux = aux->next;
+      }
+
+     printf("------------------------------\n");
+ }
+
+ void showMem(DoublyLinkedList *list){
+
+     Node * aux = list->tail->next->next;
+
+     printf("\nImpressão dos endereços de cada nó");
+     printf("\n-----------------------------------------------------------------\n");
+    //  printf("%s -\t \t \t %s -\t \t \t \b %s ","Node", "Next", "Previous\n");
+     printf("%5s  %22s  %12s %13s %7s %13s","Node:", "Next","-", "Previous","-","Data\n\n");
+         while (aux != list->tail->next)
+         {
+             printf("%p:   \t %p   -\t %p -\t %p\n ",aux,aux->next,aux->previous,aux->data);
+             aux = aux->next;
+         }
+      printf("\n-----------------------------------------------------------------\n");
+
+ }
+
 

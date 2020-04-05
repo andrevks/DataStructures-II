@@ -2,7 +2,7 @@
 
 typedef bool (*compare)(void*,void*);:white_check_mark:
 
-typedef void (*printNode)(void*);
+typedef void (*printNode)(void*);:white_check_mark:
 
 void init(DoublyLinkedList *list); :white_check_mark:
 
@@ -36,6 +36,6 @@ void* removePos(DoublyLinkedList *list, int pos);:white_check_mark:
 
 bool removeData(DoublyLinkedList *list, void *data, compare equal);:white_check_mark:
 
-void show(DoublyLinkedList *list, printNode print);
+void show(DoublyLinkedList *list, printNode print);:white_check_mark:
 
 void showMem(DoublyLinkedList *list);

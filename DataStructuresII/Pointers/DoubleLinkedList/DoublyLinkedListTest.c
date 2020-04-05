@@ -15,6 +15,13 @@ bool comparar(void *data0, void *data1){
     return (*d0 == *d1)?true:false;
 }
 
+/*função destinada a printar os nós*/
+void imprimirDados(void * data){
+
+   int * data1 = (int*) data;
+
+   printf(">> %d\n",*data1);
+}
 int main(){
   
     //criando uma DoublyLinkedList
@@ -71,8 +78,8 @@ int main(){
          x = enqueue(&list2,number6);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
-        // x =  addAll(&list,3,&list2);
-        // printf("\nN Inseridos:%d\n",x);
+        x =  addAll(&list,1,&list2);
+        printf("\nN Inseridos:%d\n",x);
 
         int * number7 = (int *) malloc(sizeof(int));
         *number7 = 1001;
@@ -81,11 +88,15 @@ int main(){
 
     //    (result)?printf("true\n"):printf("false\n");
 
-       printf("removePos: %d\n ",*((int*)removePos(&list,1)));
+    //    printf("removePos: %d\n ",*((int*)removePos(&list,1)));
 
-    while(!isEmpty(&list))
-        printf("valor retirado: %d\n ",*((int*)pop(&list)));
+    // while(!isEmpty(&list))
+    //     printf("valor retirado: %d\n ",*((int*)pop(&list)));
 
+
+    // show(&list,imprimirDados);
+
+    showMem(&list);
    
 
 

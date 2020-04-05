@@ -25,7 +25,7 @@
     }DoublyLinkedList;
 
     /*Por questões de legidibilidade, algumas funções são reutilizadas*/
-    //no DoublyLinkedListTest.c:
+    //no DoublyLinkedListTest.c:]
     //Qualquer função que alguem implementar
     //que retorne boleano e os tipos
     //das funções sejam iguais 
@@ -93,7 +93,7 @@
     void* removePos(DoublyLinkedList *list, int pos);
     bool removeData(DoublyLinkedList *list, void *data, compare equal);
 
-     //void show(DoublyLinkedList *list, printNode print)
+     //exibe os dados de todos os nós da lista;
      void show(DoublyLinkedList *list, printNode print);
      
      //exibe a organização na memória de todos os nós da lista.
