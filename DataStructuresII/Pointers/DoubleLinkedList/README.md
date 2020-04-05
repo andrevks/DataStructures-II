@@ -1,6 +1,6 @@
 # A Lista duplamente ligada terá as seguintes funções
 
-typedef bool (*compare)(void*,void*);
+typedef bool (*compare)(void*,void*);:white_check_mark:
 
 typedef void (*printNode)(void*);
 
@@ -30,11 +30,11 @@ void* getPos(DoublyLinkedList *list,int pos);:white_check_mark:
 
 int add(DoublyLinkedList *list, int pos, void *data);:white_check_mark:
 
-int addAll(DoublyLinkedList *listDest, int pos, DoublyLinkedList *listSource);
+int addAll(DoublyLinkedList *listDest, int pos, DoublyLinkedList *listSource);:white_check_mark:
 
-void* removePos(DoublyLinkedList *list, int pos);
+void* removePos(DoublyLinkedList *list, int pos);:white_check_mark:
 
-bool removeData(DoublyLinkedList *list, void *data, compare equal);
+bool removeData(DoublyLinkedList *list, void *data, compare equal);:white_check_mark:
 
 void show(DoublyLinkedList *list, printNode print);
 

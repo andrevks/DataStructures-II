@@ -93,8 +93,10 @@
     void* removePos(DoublyLinkedList *list, int pos);
     bool removeData(DoublyLinkedList *list, void *data, compare equal);
 
-    
+     //void show(DoublyLinkedList *list, printNode print)
      void show(DoublyLinkedList *list, printNode print);
+     
+     //exibe a organização na memória de todos os nós da lista.
      void showMem(DoublyLinkedList *list);
    
     #endif

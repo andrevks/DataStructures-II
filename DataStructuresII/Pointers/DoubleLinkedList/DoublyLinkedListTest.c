@@ -71,22 +71,20 @@ int main(){
          x = enqueue(&list2,number6);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
-    printf("INICIO: %d\n ",*((int*)first(&list)));
-    printf("FINAL: %d\n ",*((int*)last(&list)));
+        // x =  addAll(&list,3,&list2);
+        // printf("\nN Inseridos:%d\n",x);
 
-    printf("INICIO: %d\n ",*((int*)first(&list2)));
-    printf("FINAL: %d\n ",*((int*)last(&list2)));
+        int * number7 = (int *) malloc(sizeof(int));
+        *number7 = 1001;
 
-      x = addAll(&list,1,&list2);
+    //    bool result = removeData(&list,number7,comparar);
 
-    printf("\nElementos inseridos: %d\n",x);
+    //    (result)?printf("true\n"):printf("false\n");
 
-    printf(" Após addAll:\n");
-    printf("INICIO: %d\n ",*((int*)first(&list)));
-    printf("FINAL: %d\n ",*((int*)last(&list)));
+       printf("removePos: %d\n ",*((int*)removePos(&list,1)));
 
     while(!isEmpty(&list))
-        printf("valor retirado: %d\n ",*((int*)dequeue(&list)));
+        printf("valor retirado: %d\n ",*((int*)pop(&list)));
 
    
 

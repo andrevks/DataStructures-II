@@ -265,58 +265,7 @@ void* last(DoublyLinkedList *list){
  }
 
  //remove o nó baseado no dado
- bool removeData(DoublyLinkedList *list, void *data, compare equal){
-
-     //testa se a lista está vazia
-     if(isEmpty(list))return false;
-
-    //Se o dado do inicio for igual 
-     if(equal(list->tail->next->next->data,data)){
-
-         Node * aux;
-         //Aux aponta para o ínicio(Após trashNode)
-         aux = list->tail->next->next;
-         //
-        //  list->tail->next = aux->next;
-        list->tail->next->next = aux->next;
-        aux->next->previous = list->tail->next;
-
-         aux->next = NULL;
-         free(aux->data);
-         free(aux);
-
-         list->size--;
-
-         return true;
-     }
-
-        //senão
-         Node * aux;
-         Node * remove;
-
-         aux = list->tail->next;
-
-        //A lista é percorrida até chegar ao final ou até achar o dado
-        for(int i = 0;(aux->next != list->tail->next && !equal(aux->next->data,data)); i++, aux = aux->next);
-
-        //caso a lista for percorrida até voltar ao início, retorna-se falso   
-        if(aux->next == list->tail->next)return false;
-       
-        //caso achou algum valor:
-        remove = aux->next;
-
-        //Se for o último, o Tail tem que apontar para o penúltimo
-        if(aux->next == list->tail)list->tail = aux;
-        aux->next = remove->next;
-       
-        remove->next = NULL;
-        free(remove->data);
-        free(remove);
-        list->size--;  
-
-        return true;
- }
-
+ 
 
 
   int addAll(DoublyLinkedList *listDest, int pos, DoublyLinkedList *listSource){
@@ -357,13 +306,16 @@ void* last(DoublyLinkedList *list){
 
 void* removePos(DoublyLinkedList *list, int pos){
     
-    if(isEmpty(list) || pos >= list->size) return NULL;
+    if(isEmpty(list) || pos > list->size || pos < 1) return NULL;
 
     Node * aux = getNodeByPos(list,(pos-1));
     if(aux == NULL) return NULL;
 
     Node * removeData = aux->next;
     aux->next = removeData->next;
+    removeData->next->previous = aux;
+    if(pos == list->size)list->tail = aux;
+
     void *data = removeData->data;
     
     free(removeData);
@@ -371,3 +323,58 @@ void* removePos(DoublyLinkedList *list, int pos){
     list->size--;
     return data;
 }
+
+bool removeData(DoublyLinkedList *list, void *data, compare equal){
+
+     //testa se a lista está vazia
+     if(isEmpty(list))return false;
+
+    //Se o dado do inicio for igual 
+     if(equal(list->tail->next->next->data,data)){
+
+         Node * removeNode;
+         //removeNode aponta para o início(Após trashNode)
+         removeNode = list->tail->next->next;
+         //next do início(trashNode) aponta para o próx nó
+         list->tail->next->next = removeNode->next;
+         removeNode->next->previous = list->tail->next;
+
+         removeNode->next = NULL;
+         free(removeNode->data);
+         free(removeNode);
+
+         list->size--;
+
+         return true;
+     }
+
+        //senão
+         Node * aux;
+         Node * removeNode;
+
+         aux = list->tail->next;
+
+        //A lista é percorrida até chegar ao final ou até achar o dado
+        for(int i = 0;(aux->next != list->tail->next && !equal(aux->next->data,data)); i++, aux = aux->next);
+
+        //caso a lista for percorrida até voltar ao início, retorna-se falso   
+        if(aux->next == list->tail->next)return false;
+       
+        //caso achou algum valor:
+        removeNode = aux->next;
+
+        //Se for o último, o Tail tem que apontar para o penúltimo
+        if(aux->next == list->tail)list->tail = aux;
+        removeNode->next->previous = aux;
+        aux->next = removeNode->next;
+        
+       
+        removeNode->next = NULL;
+        free(removeNode->data);
+        free(removeNode);
+        list->size--;  
+
+        return true;
+ }
+
+
