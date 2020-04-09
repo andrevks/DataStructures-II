@@ -89,24 +89,37 @@ function experiencia(anos){
         
 }
 
-let anosEstudo = 1;
+let anosEstudo = 7;
 experiencia(anosEstudo);
 
 
 
 //Exercício 5
 
-document.writeln(`<h4>Ex4</h4>`);
-
-
-
-
-
+document.writeln(`<h4>Ex5</h4>`);
 
 
 
 
 
 const usuarios = [
-    {nome:"Diego",habilidades:["Javascript","ReactJS","Redux"]}
+    {
+        nome:"Diego",
+        habilidades:["Javascript","ReactJS","Redux"]
+    },
+    {
+        nome: "Gabriel",
+        habilidades: ["VueJS","Ruby on Rails","Elixir"]
+    }
+    
 ]
+
+function printUsuarios(users){
+
+    for(let value of users){
+        document.writeln(`<p>O ${value.nome} possui as habilidades: ${value.habilidades.join([separador = ", "])}</p>`);
+    }
+
+}
+
+printUsuarios(usuarios);
