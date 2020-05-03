@@ -124,6 +124,8 @@ function printUsuarios(users){
 
 printUsuarios(usuarios);
 
+//Exercises from the Program Structure Chapter(2)
+
 let pyramid = "";
 // console.log(typeof(pyramid));
 // for(let i = 0; i<7;i++){
