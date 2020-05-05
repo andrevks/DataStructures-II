@@ -1,6 +1,5 @@
 const campo = document.querySelector("#app");
 
-
 function createItem(){
     
     const item = document.createElement("li");
@@ -14,7 +13,7 @@ function createItem(){
 
     
     const link = document.createElement("a");
-    link.href = '#';
+    link.href = 'javascript:removeItem(event)';
 
     //Creating a Icon to delete
     const deleteItemIcon = document.createTextNode(" X");
@@ -30,8 +29,9 @@ function createItem(){
 
 document.getElementById("send").addEventListener("click",createItem);
 
-//function removeItem(){
+function removeItem(event){
+   
 
 
-//}
+}
 //document.getElementById("eachItem").addEventListener('click',removeItem);
