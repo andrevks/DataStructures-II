@@ -40,8 +40,6 @@ int enqueue(DoublyLinkedList *list, void *data){
     /*Adicina-se sempre no final, que é o tail.
     Quando deseja-se acessar o início, digita-se list->tail->next*/
 
-    //Uma nova área da memória, suficiente para armazenar um nó
-    //é  reservada usando malloc
     Node * new_node = (Node *)(malloc(sizeof(Node)));
     if(new_node == NULL) return -2;
 
@@ -146,33 +144,25 @@ void * pop(DoublyLinkedList *list){
           return data;
 }
 
-//consulta o último item da pilha
+
 void* top(DoublyLinkedList *list){
-    //Retorna NULL caso a lista esteja fazia
-    //Senão retorna o endereço do dado
+
     return (isEmpty(list))?NULL:list->tail->data;
 }
 
-//consulta o primeiro item da lista
 void* first(DoublyLinkedList *list){
 
-    //Retorna NULL caso a lista esteja fazia
-    //Senão retorna o endereço do dado
     return (isEmpty(list))?NULL:list->tail->next->next->data;
 }
-//Consulta o último item da lista
-void* last(DoublyLinkedList *list){
-    //Como o objetivo é retornar o último
-    //a função Top é reaproveitada
-    return top(list);
 
-    
+void* last(DoublyLinkedList *list){
+
+    return top(list); 
 }
 
  int add(DoublyLinkedList *list, int pos, void *data){
 
-        //Se a posição é menor ou igual a zero 
-        //o valor já é inserido na primeira posição
+    
         if(pos <= 0)return push(list,data);
 
         //senão, encontre-se o nó da posição anterior
@@ -180,19 +170,18 @@ void* last(DoublyLinkedList *list){
         Node * aux = getNodeByPos(list,(pos-1));
         if(aux == NULL)return 0;
 
-        //Novo nó é alocado
         Node * new_node =(Node*) malloc(sizeof(Node));
 
         new_node->data = data;
+
         //O next do novo nó aponta para o next do aux
         //onde é a posição informada
         new_node->next = aux->next;
-        //O anterior do nó apontado, agora aponta
-        //para o novo nó
+
         aux->next->previous = new_node;
-        //o anterior do novo nó aponta para o aux
+
         new_node->previous = aux;
-        //o prox do aux aponta para o novo nó
+
         aux->next = new_node;
 
         list->size++;
@@ -203,18 +192,10 @@ void* last(DoublyLinkedList *list){
 
   Node* getNodeByPos(DoublyLinkedList *list, int pos){
 
-        //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
-        //retorna NULL
         if(isEmpty(list) || pos > list->size) return NULL;
 
-
-        //Se caso não acontecer, continua-se e o aux aponta para o início
-        //,ou seja, após o trashNode
         Node * aux = list->tail->next;
 
-        //O contador é criado
-        //enquanto a condição do meio acontecer o loop continua
-        //Aux aponta para os nós e incrementa o count
         int count;   
         for(count = 0; (aux != list->tail && pos != count); count++, aux = aux->next);
 
@@ -398,7 +379,6 @@ bool removeData(DoublyLinkedList *list, void *data, compare equal){
 
      printf("\nImpressão dos endereços de cada nó");
      printf("\n-----------------------------------------------------------------\n");
-    //  printf("%s -\t \t \t %s -\t \t \t \b %s ","Node", "Next", "Previous\n");
      printf("%5s  %22s  %12s %13s %7s %13s","Node:", "Next","-", "Previous","-","Data\n\n");
          while (aux != list->tail->next)
          {

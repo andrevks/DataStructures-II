@@ -3,7 +3,10 @@
 
 
 int main (){
+    
+    HashStruct  Hash;
 
+    initHash(&Hash);
     
     return 0;
 }

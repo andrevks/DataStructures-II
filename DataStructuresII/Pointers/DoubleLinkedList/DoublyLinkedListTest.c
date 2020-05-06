@@ -54,11 +54,6 @@ int main(){
          x = enqueue(&list,number3);
         (x == 1)?printf("Inserido\n"):printf("Não inserido\n"); 
 
-        //    int * data1 = (int*) (list.tail->data);
-        // printf("list->tail->data= %d\n",*data1);
-    // int *number3 =  (int*)malloc(sizeof(int));
-    // *number3 = 10013;
-    // printf("IndexOf:%d\n",*((int*)getPos(&list,4)));
 
      int *number4 = (int *) malloc(sizeof(int));
         *number4 = 1004;
@@ -84,17 +79,17 @@ int main(){
         int * number7 = (int *) malloc(sizeof(int));
         *number7 = 1001;
 
-    //    bool result = removeData(&list,number7,comparar);
+       bool result = removeData(&list,number7,comparar);
 
-    //    (result)?printf("true\n"):printf("false\n");
+       (result)?printf("true\n"):printf("false\n");
 
-    //    printf("removePos: %d\n ",*((int*)removePos(&list,1)));
+       printf("removePos: %d\n ",*((int*)removePos(&list,1)));
 
-    // while(!isEmpty(&list))
-    //     printf("valor retirado: %d\n ",*((int*)pop(&list)));
+    while(!isEmpty(&list))
+        printf("valor retirado: %d\n ",*((int*)pop(&list)));
 
 
-    // show(&list,imprimirDados);
+    show(&list,imprimirDados);
 
     showMem(&list);
    
