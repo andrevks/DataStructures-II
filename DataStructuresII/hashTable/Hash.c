@@ -25,3 +25,20 @@ void initHash(HashStruct *hashStruct){
 bool isHashEmpty(HashStruct *hashStruct){
     return (hashStruct->size == 0);     
 }
+
+int hash(char *key){
+    int count = 0;
+
+    for(; *key != '\0';key++){
+        printf(" %d:\n",*key);
+        count+= *key;
+    }    
+
+    return count % MAX;
+}
+
+int put(HashStruct *hashStruct, char *key, void *data, compare equal){
+
+    hashStruct->hashes[2];
+
+}
