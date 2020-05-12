@@ -236,8 +236,8 @@ void* last(DoublyLinkedList *list){
 //retorna o index do dado informado
  int indexOf(DoublyLinkedList *list, void *data, compare equal){
      
-     //se a lista está vazia retorna -1
-     if(isEmpty(list))return -1;
+     //se a lista está vazia retorna -2
+     if(isEmpty(list))return -2;
      
      //se o primeiro item do início(após o trashNode) 
      //é igual ao dado então retorna a pos 1
