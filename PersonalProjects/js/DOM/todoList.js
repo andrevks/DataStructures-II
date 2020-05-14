@@ -19,10 +19,12 @@ function renderItems(){
         const li = document.createElement('li');
         li.appendChild(text);
         const a = document.createElement('a');
-        a.href = "javascript:removeItem()";
+        a.href = "#";
         a.innerHTML = " X";
         li.appendChild(a);
 
+        let position = todoLists.indexOf(element);
+        a.setAttribute('onclick',"removeItem("+position+")"); 
         listOfItems.appendChild(li);
     }
 }
@@ -55,13 +57,13 @@ function createItem(){
         renderItems(); 
         inputElement.value = '';
     }
- 
+
 }
 document.getElementById("send").addEventListener("click",createItem);
 
-function removeItem(){
+function removeItem(pos){
 
-    
-
+    todoLists.splice(pos,1);  
+    renderItems();
 }
 //document.getElementById("eachItem").addEventListener('click',removeItem);
