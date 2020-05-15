@@ -1,6 +1,7 @@
 var campo = document.querySelector("#app");
 var inputElement = document.getElementById("addNew");
 var listOfItems = document.getElementById("items");
+var clearButton = document.querySelector("#clear");
 
 var todoLists = [
     "Study Calculus",
@@ -12,8 +13,10 @@ function renderItems(){
 
    if(listOfItems.hasChildNodes())listOfItems.innerHTML = '';
    
-
-    for(const element of todoLists){
+   var listsParsed = JSON.parse(localStorage.todolists);
+   console.log(typeof(listsParsed));
+   
+    for(const element of listsParsed){
         
         const text = document.createTextNode(element);
         const li = document.createElement('li');
@@ -27,6 +30,7 @@ function renderItems(){
         a.setAttribute('onclick',"removeItem("+position+")"); 
         listOfItems.appendChild(li);
     }
+    
 }
 renderItems();
 
@@ -53,7 +57,8 @@ function createItem(){
     
     if(inputElement.value != ''){
         const inputValue = inputElement.value;
-        todoLists.push(inputValue);        
+        todoLists.push(inputValue);
+        saveLocalStorage();        
         renderItems(); 
         inputElement.value = '';
     }
@@ -66,4 +71,14 @@ function removeItem(pos){
     todoLists.splice(pos,1);  
     renderItems();
 }
-//document.getElementById("eachItem").addEventListener('click',removeItem);
+
+function clearLocalStorage(){
+   localStorage.clear();
+  
+}
+clearButton.addEventListener('click',clearLocalStorage);
+
+function saveLocalStorage(){
+    lists = JSON.stringify(todoLists);
+    localStorage.todolists = lists;
+}
