@@ -2,22 +2,20 @@ var campo = document.querySelector("#app");
 var inputElement = document.getElementById("addNew");
 var listOfItems = document.getElementById("items");
 var clearButton = document.querySelector("#clear");
+var addButton = document.getElementById("send");
+//Criando array que usa os dados salvos no LocalStorage
+var todoLists = localStorage.getItem("todoList");
+todoLists = todoLists? JSON.parse(todoLists):[];
 
-var todoLists = [
-    "Study Calculus",
-    "Meditate",
-    "Read a book"
-];
 
-function renderItems(){
+function renderItems() {
 
-   if(listOfItems.hasChildNodes())listOfItems.innerHTML = '';
-   
-   var listsParsed = JSON.parse(localStorage.todolists);
-   console.log(typeof(listsParsed));
-   
-    for(const element of listsParsed){
-        
+    //Para não repetir itens na lista
+    if (listOfItems.hasChildNodes()) listOfItems.innerHTML = '';
+
+
+    for (const element of todoLists) {
+
         const text = document.createTextNode(element);
         const li = document.createElement('li');
         li.appendChild(text);
@@ -26,13 +24,54 @@ function renderItems(){
         a.innerHTML = " X";
         li.appendChild(a);
 
+
         let position = todoLists.indexOf(element);
-        a.setAttribute('onclick',"removeItem("+position+")"); 
+        //Envia cada posição dos items do array como argumento 
+        //para a função 
+        a.setAttribute('onclick', "removeItem(" + position + ")");
         listOfItems.appendChild(li);
     }
-    
+
 }
 renderItems();
+
+function createItem() {
+
+    if (inputElement.value != '') {
+        const inputValue = inputElement.value;
+        todoLists.push(inputValue);
+        saveLocalStorage();
+        renderItems();
+        inputElement.value = '';
+    }
+
+}
+addButton.addEventListener("click", createItem);
+
+function removeItem(pos) {
+
+    todoLists.splice(pos, 1);
+    saveLocalStorage();
+    renderItems();
+}
+
+function clearEverything() {
+    localStorage.clear();
+
+    while(listOfItems.hasChildNodes){
+        //Remove cada child do elemento ul
+        listOfItems.removeChild(listOfItems.childNodes[0]);
+    }
+
+}
+clearButton.addEventListener('click', clearEverything);
+
+function saveLocalStorage() {
+
+    lists = JSON.stringify(todoLists);
+    localStorage.setItem("todoList", lists);
+
+}
 
 //function createItem(){
 
@@ -42,7 +81,7 @@ renderItems();
     ////Adding input value to the item 
     //const text = document.createTextNode(inputValue);
     //item.appendChild(text);
-    
+
     //const link = document.createElement("a");
     //link.href = 'javascript:removeItem(event)';
 
@@ -52,33 +91,3 @@ renderItems();
     //item.appendChild(link);
     //listOfItems.appendChild(item);
 //}
-
-function createItem(){
-    
-    if(inputElement.value != ''){
-        const inputValue = inputElement.value;
-        todoLists.push(inputValue);
-        saveLocalStorage();        
-        renderItems(); 
-        inputElement.value = '';
-    }
-
-}
-document.getElementById("send").addEventListener("click",createItem);
-
-function removeItem(pos){
-
-    todoLists.splice(pos,1);  
-    renderItems();
-}
-
-function clearLocalStorage(){
-   localStorage.clear();
-  
-}
-clearButton.addEventListener('click',clearLocalStorage);
-
-function saveLocalStorage(){
-    lists = JSON.stringify(todoLists);
-    localStorage.todolists = lists;
-}
