@@ -1,6 +1,13 @@
 #include<stdio.h>
 #include"Hash.h"
 #include<stdlib.h>
+#include<string.h>
+
+typedef struct userBanco
+{
+    char * nome;
+    int * money;
+}userBanco;
 
 bool comparar(void * data1,void *data2){
     int *d1 = (int*)data1;
@@ -11,20 +18,16 @@ bool comparar(void * data1,void *data2){
 int main (){
     
     HashStruct  Hash;
-
     initHash(&Hash);
-    char * key = "arroz";
-    int x = hash(key);
-    printf("X Key:%d\n",x);
-    //printf("containsKey:%d",containsKey(&Hash,key,comparar));
-    int * data = (int*) malloc(sizeof(int));
-    *data = 666;
 
-    printf("PUT:%d\n",put(&Hash,key,data,comparar));
-
-    int * data1 = (int*) malloc(sizeof(int));
-    *data1 = 666;
+    userBanco jessica;
+    char jessica1[] = "jessica";
+    char * ptr = (char*) malloc(sizeof(char)*30);
+    ptr = "lolasdfsadfads"; 
+    printf("jessica->name:%s\n",ptr);
     
-    printf("PUT:%d\n",put(&Hash,key,data1,comparar));
+    //printf("PUT:%d\n",put(&Hash,jessica->nome,jessica,comparar);
+
+    
     return 0;
 }

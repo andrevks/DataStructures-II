@@ -201,7 +201,7 @@ void* last(DoublyLinkedList *list){
         return 1;
  }
 
-  Node* getNodeByPos(DoublyLinkedList *list, int pos){
+Node* getNodeByPos(DoublyLinkedList *list, int pos){
 
         //Se a lista estiver vazia ou a posição foi maior ou igual ao tamanho
         //retorna NULL

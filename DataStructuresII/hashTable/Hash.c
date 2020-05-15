@@ -35,19 +35,19 @@ int hash(char *key){
 
 int put(HashStruct *hashStruct, char *key, void *data, compare equal){
     
-    if(containsKey(hashStruct,key,equal) == 0 ){
+    if(!containsKey(hashStruct,key,equal)){
         int hashValue = hash(key);
         DoublyLinkedList * matchedList;
         matchedList = &hashStruct->hashes[hashValue];
+        int sucess = enqueue(matchedList,data);
+        if(sucess == 1) hashStruct->size++;
 
-        return enqueue(&hashStruct->hashes[hashValue],data);
+        return sucess;
     }else{
         
         return -3;
     }
     
-    
-
 }
 
 bool containsKey(HashStruct *hashStruct, char *key, compare equal){
@@ -57,7 +57,10 @@ bool containsKey(HashStruct *hashStruct, char *key, compare equal){
 
     hashValue = hash(key);
     matchedList = &hashStruct->hashes[hashValue];
-    containsKey = indexOf(matchedList,key,equal); 
 
+    //printf("matchedList    -   hashStruct->hashes[hashValue]\n"); 
+    //printf("%p   -       %p\n",matchedList,&hashStruct->hashes[hashValue]);
+
+    containsKey = indexOf(matchedList,key,equal); 
     return (containsKey>0)?true:false;    
 }
