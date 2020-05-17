@@ -47,6 +47,11 @@ function createItem() {
 }
 addButton.addEventListener("click", createItem);
 
+document.addEventListener("keyup",(event)=>{
+    if(event.keyCode == 13){
+        createItem();
+    }
+})
 function removeItem(pos) {
 
     todoLists.splice(pos, 1);
