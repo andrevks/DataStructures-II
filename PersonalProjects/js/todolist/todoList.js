@@ -24,7 +24,6 @@ function renderItems() {
         a.innerHTML = " X";
         li.appendChild(a);
 
-
         let position = todoLists.indexOf(element);
         //Envia cada posição dos items do array como argumento 
         //para a função 
