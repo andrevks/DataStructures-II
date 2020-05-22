@@ -23,6 +23,6 @@
     // remove um par (chave,valor)
     void* removeKey(HashStruct *hashStruct, char *key, compare equal);
     // exibe os pares armazenados
-    void showHashStruct(HashStruct *hashStruct);
+    void showHashStruct(HashStruct *hashStruct, printNode print);
     
     #endif
