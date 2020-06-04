@@ -1,0 +1,20 @@
+
+img.float-intro {
+    width: 300px;
+    height: 200px;
+    float: right;
+    margin-right: 1em;
+}
+.clearfix::after{
+    display: table;
+    clear: both;
+    content: '';
+}
+div.float-layout-one{
+    background: brown;
+}
+div.col{
+    width: 30%;
+    margin-left: 3%;
+    float: left;
+}
