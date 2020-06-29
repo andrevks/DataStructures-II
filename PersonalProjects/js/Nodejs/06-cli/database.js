@@ -49,12 +49,22 @@ class Database{
             return await this.writeInFile([]);
         }
         const data = await this.getFileData()
-        console.log('id',id)
         const index = data.findIndex(hero => hero.id === parseInt(id))
 
         if(index === -1) throw Error("Usuário informado não existe")
 
         data.splice(index,1)
+        return await this.writeInFile(data)
+    }
+    async update(id,newHero){
+        const data = await this.getFileData()
+        const index = data.findIndex(hero => hero.id === parseInt(id))
+        if(index === -1) throw Error("Usuário informado não existe")
+
+        const currentHero = data[index]
+        currentHero.nome = newHero.nome;
+        currentHero.poder = newHero.poder;
+
         return await this.writeInFile(data)
     }
 }

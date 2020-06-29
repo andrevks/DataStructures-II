@@ -11,9 +11,15 @@ const DEFAULT_ITEM_CADASTRAR = {
     id: 1
 }
 
+const DEFAULT_ITEM_ATUALIZAR = {
+    nome: "Hulk",
+    poder:"Supernatural Force",
+    id: 2
+}
 describe('Suite de manipulação de heróis',() => {
     before(async () => {
         await database.register(DEFAULT_ITEM_CADASTRAR);
+        await database.register(DEFAULT_ITEM_ATUALIZAR);
     })
     it("Deve pesquisar um herói utilizando arquivos", async()=>{
         const expected = DEFAULT_ITEM_CADASTRAR;
@@ -32,5 +38,20 @@ describe('Suite de manipulação de heróis',() => {
         const expected = true;
         const result = await database.remove(DEFAULT_ITEM_CADASTRAR.id)
         deepEqual(result,expected)
+    })
+    it("Deve atualizar um herói pelo id", async () =>{
+        const expected = {
+            ...DEFAULT_ITEM_ATUALIZAR,
+            nome: 'Batman',
+            poder: 'Money'
+        }
+        const newData = {
+            nome: 'Batman',
+            poder: 'Money'
+        }
+        await database.update(DEFAULT_ITEM_ATUALIZAR.id, newData)
+        const [ result ] = await database.listData(DEFAULT_ITEM_ATUALIZAR.id)
+        deepEqual(result, expected)
+
     })
 })
