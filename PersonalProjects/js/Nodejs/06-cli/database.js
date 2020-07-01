@@ -62,8 +62,8 @@ class Database{
         if(index === -1) throw Error("Usuário informado não existe")
 
         const currentHero = data[index]
-        currentHero.nome = newHero.nome;
-        currentHero.poder = newHero.poder;
+        currentHero.name = newHero.name;
+        currentHero.power = newHero.power;
 
         return await this.writeInFile(data)
     }
