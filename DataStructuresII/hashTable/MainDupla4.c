@@ -37,20 +37,18 @@ int main() {
     x = put(&hashes,lucas->email,lucas,comparaChaves);
     printf("x:%d\n",x);
 
-    Cliente *ze = (Cliente*) malloc(sizeof(Cliente));
-    strcpy(ze->nome,"ze");
-    strcpy(ze->email,"ze@gmail.com");
+    Cliente *danubia = (Cliente*) malloc(sizeof(Cliente));
+    strcpy(danubia->nome,"Danubia");
+    strcpy(danubia->email,"Danubia@gmail.com");
 
-    x = put(&hashes,ze->email,ze,comparaChaves);
+    x = put(&hashes,danubia->email,danubia,comparaChaves);
     printf("x:%d\n",x);
 
     showHashStruct(&hashes,printCliente);
-    //Cliente * clientTest = (Cliente*) malloc(sizeof(Cliente));
-    //clientTest = (Cliente*)get(&hashes,ze->email,comparaChaves);
-    //printf("Nome:%s e Email:%s",clientTest->nome,clientTest->email);
-    removeKey(&hashes,cliente->email,comparaChaves);
-    printf("After\n");
-    showHashStruct(&hashes,printCliente);
-
+    Cliente * clientTest = (Cliente*) malloc(sizeof(Cliente));
+    clientTest = (Cliente*)get(&hashes,danubia->email,comparaChaves);
+    //Cliente * test = (Cliente*) malloc(sizeof(Cliente));
+    //test = removeKey(&hashes,lucas->email,comparaChaves);
+    
 return 0;
 }

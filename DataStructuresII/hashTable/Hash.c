@@ -5,9 +5,9 @@
 
 
 void initHash(HashStruct *hashStruct){
-    for(int i = 0; i<MAX;i++){
-        init((&hashStruct->hashes[i]));
-    }
+
+    for(int i = 0; i<MAX;i++)init(&(hashStruct->hashes[i]));
+    
     hashStruct->size = 0;
 }
 
@@ -45,7 +45,7 @@ bool containsKey(HashStruct *hashStruct, char *key, compare equal){
 
     matchedList = &hashStruct->hashes[hash(key)];
     containsKey = indexOf(matchedList,key,equal); 
-    return (containsKey>0)?true:false;    
+    return (containsKey>=0)?true:false;    
 }
 
 void* get(HashStruct *hashStruct, char *key, compare equal){
@@ -66,9 +66,11 @@ void* get(HashStruct *hashStruct, char *key, compare equal){
 
 void* removeKey(HashStruct *hashStruct, char *key, compare equal){  
 
-    int pos = indexOf(&hashStruct->hashes[hash(key)],key,equal);
+    int hashValue = hash(key);
+    int pos = indexOf(&hashStruct->hashes[hashValue],key,equal);
 
-    Node * removedNode = removePos(&hashStruct->hashes[hash(key)],pos);
+    printf("Pos:%d\n",pos);
+    void * removedNode = removePos(&hashStruct->hashes[hashValue],pos);
     if(removedNode != NULL)hashStruct->size--;
     return removedNode;
 }

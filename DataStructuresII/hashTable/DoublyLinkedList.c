@@ -243,20 +243,20 @@ Node* getNodeByPos(DoublyLinkedList *list, int pos){
      //é igual ao dado então retorna a pos 1
      if(equal(list->tail->next->next->data,data)) return 1;
 
-     //Se é igual ao último então retorna o tamanho
+     //se é igual ao último então retorna o tamanho
      if(equal(list->tail->data,data)) return list->size;
      
-     //Senão, o aux é criado e a lista é percorrida
+     //senão, o aux é criado e a lista é percorrida
      //a partir do segundo elemento.
      int i;
 
      Node * aux;
-     //Aux aponta para o início(trashNode)
+     //aux aponta para o início(trashnode)
      aux = list->tail->next;
      aux = aux->next;
      aux = aux->next;
      
-     //Percorre até o aux apontar para o início(trashNode)
+     //percorre até o aux apontar para o início(trashnode)
      //ou até o valor for igual
      for(i=2;(aux != list->tail->next && !equal(aux->data,data)); i++, aux = aux->next);
     
