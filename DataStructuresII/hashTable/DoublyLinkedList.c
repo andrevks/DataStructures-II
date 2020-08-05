@@ -381,7 +381,6 @@ bool removeData(DoublyLinkedList *list, void *data, compare equal){
 
      Node * aux = list->tail->next->next;
 
-     printf("\nImpressão dos dados de cada nó");
      printf("\n------------------------------\n");
 
      while(aux != list->tail->next){

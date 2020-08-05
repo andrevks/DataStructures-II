@@ -35,17 +35,17 @@ int main (){
    jessica->nome =(char*) malloc(30 * sizeof(char));
    strcpy(jessica->nome,"andrE");
    jessica->saldo =(float *) malloc(sizeof(float));
-   jessica->saldo = 7956,95;
+   jessica->saldo = 7956;
   
    joao->nome =(char*) malloc(30 * sizeof(char));
    strcpy(joao->nome,"joao");
    joao->saldo =(float *) malloc(sizeof(float));
-   joao->saldo = 8567,55;
+   joao->saldo = 8567;
 
    andre->nome =(char*) malloc(30 * sizeof(char));
    strcpy(andre->nome,"andre");
    andre->saldo =(float *) malloc(sizeof(float));
-   andre->saldo = 15967,55;
+   andre->saldo = 15967;
 
    printf("jessica.nome:%s e jessica.saldo: R$ %.2f e key:%d\n",jessica->nome,*jessica->saldo,hash(jessica->nome)); 
    printf("joao.nome:%s e joao.saldo: R$ %.2f e key:%d\n",joao->nome,joao->saldo,hash(joao->nome)); 

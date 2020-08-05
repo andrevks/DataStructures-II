@@ -5,11 +5,8 @@
 
 
 void initHash(HashStruct *hashStruct){
-    DoublyLinkedList * aux;
-    aux = hashStruct->hashes;
     for(int i = 0; i<MAX;i++){
-        init(aux);
-        aux++;
+        init((&hashStruct->hashes[i]));
     }
     hashStruct->size = 0;
 }
@@ -30,39 +27,60 @@ int hash(char *key){
 int put(HashStruct *hashStruct, char *key, void *data, compare equal){
     
     if(!containsKey(hashStruct,key,equal)){
-        int hashValue = hash(key);
         DoublyLinkedList * matchedList;
 
-        matchedList = &hashStruct->hashes[hashValue];
-        int sucess = enqueue(matchedList,data);
-        if(sucess == 1) hashStruct->size++;
-        return sucess;
+        matchedList = &hashStruct->hashes[hash(key)];
+        int item = enqueue(matchedList,data);
+        hashStruct->size+=item;
+        return item;
     }
         
-        return -3;
-    
-    
+        return -2;
 }
 
 bool containsKey(HashStruct *hashStruct, char *key, compare equal){
     
     DoublyLinkedList * matchedList;
-    int hashValue ,containsKey;
+    int containsKey;
 
-    hashValue = hash(key);
-    matchedList = &hashStruct->hashes[hashValue];
+    matchedList = &hashStruct->hashes[hash(key)];
     containsKey = indexOf(matchedList,key,equal); 
     return (containsKey>0)?true:false;    
 }
 
+void* get(HashStruct *hashStruct, char *key, compare equal){
+    //quase igual à containsKey
+    Node * aux;
+    Node *trashNode;
+
+
+    trashNode = hashStruct->hashes[hash(key)].tail->next;
+    aux = trashNode->next;
+   
+    for(;aux != trashNode && !equal(aux->data,key);aux = aux->next);
+
+    return aux->data;
+    //return (aux != trashNode)?aux->data: NULL;
+
+}
+
+void* removeKey(HashStruct *hashStruct, char *key, compare equal){  
+
+    int pos = indexOf(&hashStruct->hashes[hash(key)],key,equal);
+
+    Node * removedNode = removePos(&hashStruct->hashes[hash(key)],pos);
+    if(removedNode != NULL)hashStruct->size--;
+    return removedNode;
+}
+
 void showHashStruct(HashStruct *hashStruct,printNode print){
    
-   DoublyLinkedList * aux;
+  //  printf("HashTable com %d elementos\n",hashStruct->size);
     for(int i = 0; i<MAX;i++){
         if(hashStruct->hashes[i].size > 0){
             //printf("&hashStruct->hashes[i]:%s e %f",hashStruct->hashes[i].tail->next->next->data);
             //aux = hashStruct->hashes[i].tail->next->next->data
-            
+            printf("Hashes[%d] tem %d elementos",i,hashStruct->hashes[i].size);
             show(&hashStruct->hashes[i],print);
         }
     }
