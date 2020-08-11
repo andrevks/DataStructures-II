@@ -16,6 +16,17 @@ static void hash_to_string(char string[65], const uint8_t hash[32])
 }
 void initBlockchain(Blockchain *blockchain){
 
+    Block * genesisBlock = (Block*) malloc(sizeof(Block));  
+    genesisBlock->index = 0;
+    genesisBlock->previousHash = "0";
+    genesisBlock->previousBlock = NULL;
+    genesisBlock->data = 800000;
+    genesisBlock->timestamp = time(NULL);
+    genesisBlock->hash = calculateHash(genesisBlock->index,genesisBlock->previousHash,genesisBlock->timestamp,genesisBlock->data);
+
+    blockchain->genesisBlock = genesisBlock;
+    blockchain->latestBlock = genesisBlock;
+
 }
 char* calculateHash(int index, char* previousHash, unsigned long timestamp, float data){
     char input[1024];
@@ -31,16 +42,43 @@ char* calculateHash(int index, char* previousHash, unsigned long timestamp, floa
 
     return hash_string;
 }
+char * calculateBlockHash(Block* block){
+    return calculateHash(block->index,block->previousHash,block->timestamp,block->data);
+}
 Block* generateNextBlock(Blockchain *blockchain, float data){
-    
+    Block * previousBlock = getLatestBlock(blockchain);
+    Block * newBlock = (Block*) malloc(sizeof(newBlock));
+
+    newBlock->previousBlock = previousBlock;
+    newBlock->previousHash = previousBlock->hash;
+    newBlock->data = data;
+    newBlock->timestamp = time(NULL);
+    newBlock->index = previousBlock->index++;
+    newBlock->hash = calculateBlockHash(newBlock);
+
+    return newBlock;
 }
 Block* getLatestBlock(Blockchain *blockchain){
-
+    return blockchain->latestBlock;
 }
 bool isValidNewBlock(Block* newBlock, Block* previousBlock){
+ 
+
+   if(newBlock->index != previousBlock->index+1){
+       return false;
+   }
+   else if(newBlock->previousHash != previousBlock->hash){
+       return false;
+   }else if(strcmp(calculateBlockHash(newBlock),newBlock->hash) !=0){
+       return false;
+   } 
 
 }
 bool isBlockchainValid(Blockchain *blockchain){
+
+    Block * block = getLatestBlock(blockchain);
+    
+    
 
 }
 int addBlock(Blockchain *blockchain, Block *newBlock){
