@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "sha-256.h"
 
 #define CHUNK_SIZE 64
 #define TOTAL_LEN_LEN 8
