@@ -28,8 +28,18 @@ present in the tree, we reach the NULL node.)
 5 - Every path from a root node to a NULL node has the same number of black nodes.
 */
 
-TreeNode * initTree(TreeNode * tree, TreeNode * parent);    
+TreeNode * initTree(TreeNode * tree, TreeNode * parent); 
 
+void leftRotate(TreeNode ** tree, TreeNode * x);
+/*
+    Para fazer uma rotação ara esquerda de x
+    Suponhe-se que que seu filho à direita y não é NULL;
+    x pode  ser qualquer nó na árvore na qual seu filho à direita é diferente de NULL.
+
+    A rotação para a esquerda, gira ao redor da ligação de x para y. 
+    Transforma y na nova raiz da subárvore, com x como filho à esquerda de y
+    e o filho à esquerda de y como filho à direita de x.
+*/
 
 
     
