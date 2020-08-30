@@ -42,7 +42,10 @@ void leftRotate(TreeNode ** tree, TreeNode * x);
 */
 
 
+void rightRotate(TreeNode **root,TreeNode *y);
     
+void insertFixUp(TreeNode ** root, TreeNode *z);
 
+void insert(TreeNode **root, int data);
 
 #endif
