@@ -39,5 +39,15 @@ tree_node* minimum(red_black_tree *t, tree_node *x);
 void rb_delete_fixup(red_black_tree *t, tree_node *x);
 
 void rb_delete(red_black_tree *t, tree_node *z);
+/* 
+Quando queremos eliminar o nó z e z tem menos do que dois filhos, 
+z é removido da árvore e queremos que y seja z.
+
+Quando z tem dois filhos, y deve ser o sucessor de z , e y passa para a posição de z na árvore. 
+
+Também lembramos a cor de y antes de ele ser eliminado da árvore ou passar para dentro dela, 
+e rastreamos o nó x que passa para a posição original de y na árvore porque o nó x também poderia 
+causar violações das propriedades vermelho-preto
+*/
 
 void inorder(red_black_tree *t, tree_node *n);

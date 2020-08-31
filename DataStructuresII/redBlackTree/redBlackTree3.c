@@ -27,19 +27,19 @@ red_black_tree* new_red_black_tree() {
 }
 
 void left_rotate(red_black_tree *t, tree_node *x) {
-  tree_node *y = x->right;
-  x->right = y->left;
+  tree_node *y = x->right; //define y
+  x->right = y->left; //transforma a subárvore à esquerda de y na subá à direita de x
   if(y->left != t->NIL) {
     y->left->parent = x;
   }
   y->parent = x->parent;
-  if(x->parent == t->NIL) { //x is root
+  if(x->parent == t->NIL) { //x é raiz 
     t->root = y;
   }
-  else if(x == x->parent->left) { //x is left child
+  else if(x == x->parent->left) { //x é filho à esquerda 
     x->parent->left = y;
   }
-  else { //x is right child
+  else { //x 
     x->parent->right = y;
   }
   y->left = x;
@@ -157,24 +157,24 @@ tree_node* minimum(red_black_tree *t, tree_node *x) {
 
 void rb_delete_fixup(red_black_tree *t, tree_node *x) {
   while(x != t->root && x->color == Black) {
-    if(x == x->parent->left) {
-      tree_node *w = x->parent->right;
+    if(x == x->parent->left) {  
+      tree_node *w = x->parent->right;  //caso 1 (inicio)
       if(w->color == Red) {
         w->color = Black;
-        x->parent->color = Red;
+        x->parent->color = Red;  
         left_rotate(t, x->parent);
-        w = x->parent->right;
+        w = x->parent->right;  //caso 1(termina)
       }
       if(w->left->color == Black && w->right->color == Black) {
-        w->color = Red;
-        x = x->parent;
+        w->color = Red; //caso 2
+        x = x->parent; //caso 2
       }
       else {
         if(w->right->color == Black) {
-          w->left->color = Black;
+          w->left->color = Black; //caso 3 (inicio)
           w->color = Red;
           right_rotate(t, w);
-          w = x->parent->right;
+          w = x->parent->right; //caso 3
         }
         w->color = x->parent->color;
         x->parent->color = Black;
@@ -214,20 +214,28 @@ void rb_delete_fixup(red_black_tree *t, tree_node *x) {
 }
 
 void rb_delete(red_black_tree *t, tree_node *z) {
+
+  //Y aponta para o nó z
   tree_node *y = z;
   tree_node *x;
   enum COLOR y_orignal_color = y->color;
   if(z->left == t->NIL) {
+    //aponta o único filho de y ou sentinela T.nil
     x = z->right;
     rb_transplant(t, z, z->right);
   }
   else if(z->right == t->NIL) {
+    //aponta o único filho de y ou sentinela T.nil
     x = z->left;
     rb_transplant(t, z, z->left);
   }
+  //Quando z tem dois filhos,
   else {
+    //Y apontar para o sucessor de z
     y = minimum(t, z->right);
+    //Guarda cor de Y
     y_orignal_color = y->color;
+    //aponta o único filho de y ou sentinela T.nil
     x = y->right;
     if(y->parent == z) {
       x->parent = z;
@@ -243,6 +251,7 @@ void rb_delete(red_black_tree *t, tree_node *z) {
     y->color = z->color;
   }
   if(y_orignal_color == Black)
+    //Precisa restaurar as propriedades vermelho-preto
     rb_delete_fixup(t, x);
 }
 
