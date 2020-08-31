@@ -194,6 +194,146 @@ void insert(struct node **root, int data)
     }
 }
 
+void deleteFixUp( struct node **root,struct node *x) {
+
+  while(x != *root && x->color == 'B') {
+    if(x == x->parent->left) {
+      struct node *w = x->parent->right;
+      if(w->color == 'R') {
+        w->color = 'B';
+        x->parent->color = 'R';
+        LeftRotate(root, x->parent);
+        w = x->parent->right;
+      }
+      if(w->left->color == 'B' && w->right->color == 'B') {
+        w->color = 'R';
+        x = x->parent;
+      }
+      else {
+        if(w->right->color == 'B') {
+          w->left->color = 'B';
+          w->color = 'R';
+          rightRotate(root, w);
+          w = x->parent->right;
+        }
+        w->color = x->parent->color;
+        x->parent->color = 'B';
+        w->right->color = 'B';
+        LeftRotate(root, x->parent);
+        x = *root;
+      }
+    }
+    else {
+      struct node *w = x->parent->left;
+      if(w->color == 'R') {
+        w->color = 'B';
+        x->parent->color = 'R';
+        rightRotate(root, x->parent);
+        w = x->parent->left;
+      }
+      if(w->right->color == 'B' && w->left->color == 'B') {
+        w->color = 'R';
+        x = x->parent;
+      }
+      else {
+        if(w->left->color == 'B') {
+          w->right->color = 'B';
+          w->color = 'R';
+          LeftRotate(root, w);
+          w = x->parent->left;
+        }
+        w->color = x->parent->color;
+        x->parent->color = 'B';
+        w->left->color = 'B';
+        rightRotate(root, x->parent);
+        x = *root;
+      }
+    }
+  }
+  x->color = 'B';
+}
+//struct node *deleteFixUp(struct node *tree,struct node *x){
+
+//struct node *w;
+
+//while ( x != tree && x->color == 0 )
+//{
+    //if ( x == x->parent->left )
+    //{
+        //w = x->parent->right;
+
+        //if ( w->color == 1 )
+        //{
+            //w->color = 0;
+            //x->parent->color = 1;
+            //LeftRotate(tree, x->parent);
+            //w = x->parent->right;
+        //}
+
+        //if ( w->left->color == 0 && w->right->color == 0 )
+        //{
+            //w->color = 1;
+            //x = x->parent;
+        //}
+
+        //else
+        //{
+            //if ( w->right->color == 0 )
+            //{
+                //w->left->color = 0;
+                //w->color = 1;
+                //rightRotate(tree, w);
+                //w = x->parent->right;
+            //}
+
+            //w->color = x->parent->color;
+            //x->parent->color = 0;
+            //w->right->color = 0;
+            //LeftRotate(tree, x->parent);
+            //x = tree;
+        //}
+    //}
+
+    //else
+    //{
+        //w = x->parent->left;
+
+        //if ( w->color == 1 )
+        //{
+            //w->color = 0;
+            //x->parent->color = 1;
+            //rightRotate(tree, x->parent);
+            //w = x->parent->left;
+        //}
+
+        //if ( w->left->color == 0 && w->right->color == 0 )
+        //{
+            //w->color = 1;
+            //x = x->parent;
+        //}
+
+        //else
+        //{
+            //if ( w->left->color == 0 )
+            //{
+                //w->right->color = 0;
+                //w->color = 1;
+                //LeftRotate(tree, w);
+                //w = x->parent->left;
+            //}
+
+            //w->color = x->parent->color;
+            //x->parent->color = 0;
+            //w->left->color = 0;
+            //rightRotate(tree, x->parent);
+            //x = tree;
+        //}
+    //}
+//}
+
+//x->color = 0;
+//return w;
+//}
 // A utility function to traverse Red-Black tree in inorder fashion
 void inorder(struct node *root)
 {
@@ -201,7 +341,7 @@ void inorder(struct node *root)
     if (root == NULL)
         return;
     inorder(root->left);
-    printf("%d ", root->data);
+    printf("(%d):%c\n ", root->data, root->color);
     if (root->data < last)
         printf("\nPUTE\n");
     last = root->data;
@@ -215,20 +355,30 @@ void inorder(struct node *root)
 /* Drier program to test above function*/
 int main()
 {
-    srandom(time(NULL));
-    struct node *root = NULL;
+    //srandom(time(NULL));
+    //struct node *root = NULL;
 
-    clock_t t0 = clock();
-    for (int i = 0; i < NB_ELEMS; ++i)
-		insert(&root, random());
-    clock_t t1 = clock();
-    printf("inorder Traversal Is :\n");
+    //clock_t t0 = clock();
+    //for (int i = 0; i < NB_ELEMS; ++i)
+		//insert(&root, random());
+    //clock_t t1 = clock();
+    //printf("inorder Traversal Is :\n");
+    //inorder(root);
+    //printf("\n");
+    //float time_taken = (float)(t1 - t0) / CLOCKS_PER_SEC * 1000;
+	//printf("insertion took %fms -> %fus/elem\n",
+		//time_taken,
+		//time_taken / NB_ELEMS * 1000);
+
+    struct node * root = NULL;
+    for(int i = 0; i< NB_ELEMS; ++i)
+        insert(&root,random());
+
+    printf("Em ordem transversal: \n");
     inorder(root);
     printf("\n");
-    float time_taken = (float)(t1 - t0) / CLOCKS_PER_SEC * 1000;
-	printf("insertion took %fms -> %fus/elem\n",
-		time_taken,
-		time_taken / NB_ELEMS * 1000);
+
+
 	
     return 0;
 
